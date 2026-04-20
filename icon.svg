@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="chromeBorder" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="35%" stop-color="#C8CAD0"/>
+      <stop offset="65%" stop-color="#6A6C72"/>
+      <stop offset="100%" stop-color="#2E3036"/>
+    </linearGradient>
+    <linearGradient id="chromeBar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F5F5F7"/>
+      <stop offset="30%" stop-color="#D0D2D8"/>
+      <stop offset="70%" stop-color="#8A8C92"/>
+      <stop offset="100%" stop-color="#5A5C62"/>
+    </linearGradient>
+    <linearGradient id="chromeText" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="55%" stop-color="#C8CAD0"/>
+      <stop offset="100%" stop-color="#70727A"/>
+    </linearGradient>
+    <linearGradient id="innerShade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(0,0,0,0)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,0.35)"/>
+    </linearGradient>
+    <linearGradient id="barShine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.35)"/>
+      <stop offset="55%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+    <radialGradient id="bgGrad" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#1a1a1e"/>
+      <stop offset="100%" stop-color="#0A0A0A"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background (rounded square) -->
+  <rect x="0" y="0" width="512" height="512" rx="96" fill="url(#bgGrad)"/>
+
+  <!-- Chrome-silver ambient glow -->
+  <circle cx="256" cy="180" r="180" fill="rgba(200, 202, 208, 0.08)"/>
+
+  <!-- Outer shield -->
+  <path d="M 96 160 L 96 280 Q 96 370 256 430 Q 416 370 416 280 L 416 160 Q 416 140 396 140 L 116 140 Q 96 140 96 160 Z"
+        fill="#0A0A0A" stroke="url(#chromeBorder)" stroke-width="6"/>
+
+  <!-- Inner chrome hairline -->
+  <path d="M 110 168 L 110 278 Q 110 362 256 418 Q 402 362 402 278 L 402 168 Q 402 152 386 152 L 126 152 Q 110 152 110 168 Z"
+        fill="none" stroke="url(#chromeBorder)" stroke-width="2" opacity="0.5"/>
+
+  <!-- TOP CHROME BAR with 888 -->
+  <rect x="86" y="180" width="340" height="72" fill="url(#chromeBar)"/>
+  <rect x="86" y="180" width="340" height="72" fill="url(#innerShade)" opacity="0.4"/>
+  <rect x="90" y="183" width="332" height="14" fill="url(#barShine)"/>
+  <rect x="86" y="180" width="340" height="72" fill="none" stroke="#0A0A0A" stroke-width="3"/>
+
+  <text x="256" y="242" text-anchor="middle"
+        font-family="Bungee, Impact, sans-serif" font-size="66"
+        font-weight="900" fill="#0A0A0A" letter-spacing="3">888</text>
+
+  <!-- Black stripe with chrome text -->
+  <rect x="96" y="262" width="320" height="28" fill="#0A0A0A"/>
+  <text x="256" y="283" text-anchor="middle"
+        font-family="Staatliches, Impact, sans-serif" font-size="18"
+        fill="url(#chromeText)" letter-spacing="4">MOBILE MECHANICS</text>
+
+  <!-- Bottom chrome shield with MECH -->
+  <path d="M 96 300 L 416 300 L 416 326 Q 416 368 256 400 Q 96 368 96 326 Z"
+        fill="url(#chromeBar)"/>
+  <path d="M 96 300 L 416 300 L 416 326 Q 416 368 256 400 Q 96 368 96 326 Z"
+        fill="url(#innerShade)" opacity="0.35"/>
+  <path d="M 96 300 L 416 300 L 416 326 Q 416 368 256 400 Q 96 368 96 326 Z"
+        fill="none" stroke="#0A0A0A" stroke-width="3"/>
+  <rect x="100" y="302" width="312" height="10" fill="url(#barShine)"/>
+
+  <text x="256" y="348" text-anchor="middle"
+        font-family="Bungee, Impact, sans-serif" font-size="44"
+        fill="#0A0A0A" letter-spacing="6">MECH</text>
+
+  <!-- Chrome rivets -->
+  <circle cx="118" cy="165" r="4" fill="url(#chromeBorder)"/>
+  <circle cx="394" cy="165" r="4" fill="url(#chromeBorder)"/>
+  <circle cx="118" cy="320" r="4" fill="url(#chromeBorder)"/>
+  <circle cx="394" cy="320" r="4" fill="url(#chromeBorder)"/>
+</svg>

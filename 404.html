@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>404 — 888MECH</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="/icon.svg">
+<meta name="theme-color" content="#0A0A0A" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F5F5F3" media="(prefers-color-scheme: light)">
+<meta name="color-scheme" content="dark light">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Staatliches&family=Special+Elite&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: dark light;
+    --bg: #0A0A0A;
+    --text: #E8E8EC;
+    --muted: #9B9DA3;
+    --text-grad: linear-gradient(180deg, #FFFFFF 0%, #C8CAD0 45%, #6A6C72 100%);
+    --num-grad: linear-gradient(180deg, #F5F5F7 0%, #C8CAD0 40%, #6A6C72 75%, #2E3036 100%);
+    --btn-grad: linear-gradient(135deg, #F0F0F4 0%, #C8CAD0 40%, #9B9DA3 70%, #6A6C72 100%);
+    --btn-text: #0A0A0A;
+    --kicker: #9B9DA3;
+    --glow: rgba(200, 202, 208, 0.12);
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #F5F5F3;
+      --text: #0A0A0A;
+      --muted: #6A6C72;
+      --text-grad: linear-gradient(180deg, #0A0A0A 0%, #2E3036 45%, #6A6C72 100%);
+      --num-grad: linear-gradient(180deg, #0A0A0A 0%, #2A2C30 40%, #5A5C62 75%, #8A8C92 100%);
+      --btn-grad: linear-gradient(135deg, #2E3036 0%, #1A1A1D 50%, #0A0A0A 100%);
+      --btn-text: #F5F5F7;
+      --kicker: #6A6C72;
+      --glow: rgba(42, 44, 48, 0.06);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    font-family: 'Barlow', system-ui, sans-serif;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, var(--glow), transparent 60%),
+      var(--bg);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+  }
+  .wrap { max-width: 520px; }
+  .num {
+    font-family: 'Bungee', Impact, sans-serif;
+    font-size: clamp(96px, 26vw, 180px);
+    line-height: 1;
+    background: var(--num-grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 0.02em;
+  }
+  h1 {
+    font-family: 'Bungee', Impact, sans-serif;
+    font-size: clamp(22px, 5vw, 32px);
+    letter-spacing: 0.05em;
+    margin: 12px 0 10px;
+    background: var(--text-grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  p {
+    font-family: 'Special Elite', monospace;
+    color: var(--muted);
+    font-size: 15px;
+    margin-bottom: 28px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 28px;
+    font-family: 'Bungee', Impact, sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.12em;
+    color: var(--btn-text);
+    text-decoration: none;
+    background: var(--btn-grad);
+    border-radius: 16px;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.25),
+      0 8px 28px rgba(0, 0, 0, 0.3);
+    transition: transform 160ms ease;
+  }
+  .btn:active { transform: scale(0.97); }
+  .kicker {
+    font-family: 'Staatliches', Impact, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--kicker);
+    margin-bottom: 4px;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="kicker">888MECH</div>
+    <div class="num">404</div>
+    <h1>WRONG TURN, RIDER</h1>
+    <p>This page threw a rod. Let's get you back to the shop.</p>
+    <a class="btn" href="/">RETURN TO HOMEPAGE</a>
+  </div>
+</body>
+</html>

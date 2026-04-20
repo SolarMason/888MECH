@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://888mech.com/</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://888mech.com/og-image.png</image:loc>
+      <image:title>888MECH — Mobile Mechanics Scranton NEPA</image:title>
+      <image:caption>On-demand mobile mechanics for cars, trucks, and motorcycles.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://888mech.com/icon-512.png</image:loc>
+      <image:title>888MECH Logo</image:title>
+    </image:image>
+  </url>
+</urlset>

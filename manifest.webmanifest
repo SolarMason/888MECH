@@ -1,0 +1,54 @@
+{
+  "name": "888MECH — Mobile Mechanics",
+  "short_name": "888MECH",
+  "description": "On-demand mobile mechanics for cars, trucks, and motorcycles. We come to you. Scranton NEPA. Call (570) 614-8445.",
+  "id": "/?source=pwa",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait",
+  "background_color": "#0A0A0A",
+  "theme_color": "#0A0A0A",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["business", "utilities", "lifestyle"],
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icon-180.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Pay Now (Cash App)",
+      "short_name": "Pay",
+      "description": "Pay via Cash App $Triple888mech",
+      "url": "https://cash.app/$Triple888mech",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Call 888MECH",
+      "short_name": "Call",
+      "description": "Call (570) 614-8445",
+      "url": "tel:+15706148445",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Text to Book",
+      "short_name": "Text",
+      "description": "Text to book a service",
+      "url": "sms:+15706148445",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Email",
+      "short_name": "Email",
+      "description": "Email 888MECH",
+      "url": "mailto:joetriple888@yahoo.com",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "prefer_related_applications": false
+}

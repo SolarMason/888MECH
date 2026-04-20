@@ -1,0 +1,16 @@
+/* TEAM */
+Owner & Head Mechanic: Joe (Triple 888 Mech)
+Contact: (570) 614-8445
+Email: joetriple888@yahoo.com
+Cash App: $Triple888mech
+Location: Scranton, Pennsylvania — NEPA
+
+/* THANKS */
+To every rider and driver who trusted us to come to them.
+
+/* SITE */
+Last update: 2026/04/20
+Standards: HTML5, CSS3, JavaScript, PWA
+Components: Progressive Web App, Liquid Glass UI, Harley-Davidson industrial aesthetic
+Doctype: HTML5
+Hosting: GitHub Pages
