@@ -334,155 +334,191 @@
 
 <style>
 /* ============================================================
-   888MECH — Black Chrome · iOS Liquid Glass
-   Works in both dark and light (prefers-color-scheme)
+   888MECH · iOS Liquid Glass · Black Chrome Edition v2
+   Designed for iOS 18 fidelity — both light and dark modes
    ============================================================ */
+
 :root {
   color-scheme: dark light;
 
-  /* === Shared (both themes) === */
+  /* === Universal === */
   --cash-green: #00D632;
   --cash-green-dark: #00A826;
-  --red-alert: #C8102E;
+  --red-alert: #FF3B30;  /* iOS red */
+  --ios-blue: #0A84FF;   /* iOS blue */
 
-  /* Fonts */
-  --font-display: 'Bungee', 'Staatliches', Impact, sans-serif;
-  --font-heading: 'Staatliches', 'Oswald', Impact, sans-serif;
-  --font-body: 'Barlow', system-ui, -apple-system, sans-serif;
-  --font-menu: 'Special Elite', 'Courier New', monospace;
+  /* === Type system (SF-Pro stack) === */
+  --font-sf: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-sf-text: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro', system-ui, sans-serif;
+  --font-sf-mono: ui-monospace, 'SF Mono', Menlo, Monaco, 'Cascadia Mono', Consolas, monospace;
+  --font-sf-rounded: ui-rounded, -apple-system-rounded, 'SF Pro Rounded', system-ui, sans-serif;
+  --font-display: 'Bungee', Impact, sans-serif;
+  --font-condensed: 'Staatliches', Impact, sans-serif;
 
-  /* Spacing */
+  /* === Insets === */
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --safe-top: env(safe-area-inset-top, 0px);
-  --action-bar-h: calc(72px + var(--safe-bottom));
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --action-bar-h: calc(76px + var(--safe-bottom));
 
-  /* Blur */
-  --glass-blur: saturate(180%) blur(28px);
-  --glass-blur-heavy: saturate(180%) blur(40px);
-
-  /* === Dark theme defaults === */
-  --bg-base: #0A0A0A;
-  --bg-surface: #141418;
-
-  --surface-glass: rgba(22, 22, 26, 0.55);
-  --surface-glass-bright: rgba(40, 40, 44, 0.55);
-  --surface-elevated: rgba(30, 30, 34, 0.75);
-
-  /* Chrome scale (bright → deep) */
-  --chrome-high: #FFFFFF;
-  --chrome-bright: #E8E8EC;
-  --chrome: #C8CAD0;
-  --chrome-mid: #9B9DA3;
-  --chrome-dim: #6A6C72;
-  --chrome-deep: #3A3C42;
-  --chrome-shadow: #1A1A1D;
-
-  /* Semantic text */
-  --text-primary: #E8E8EC;
-  --text-secondary: #9B9DA3;
-  --text-muted: #6A6C72;
-  --text-on-chrome: #0A0A0A;  /* black text on chrome bars */
-
-  /* Borders */
-  --border-thin: rgba(255, 255, 255, 0.08);
-  --border-chrome: rgba(200, 202, 208, 0.28);
-  --border-chrome-bright: rgba(232, 232, 236, 0.45);
-
-  /* Gradients (theme-aware) */
-  --grad-text-hero: linear-gradient(180deg, #FFFFFF 0%, #C8CAD0 45%, #707278 65%, #2E3036 100%);
-  --grad-text-accent: linear-gradient(180deg, #FFFFFF 0%, #BFC1C7 50%, #8A8C92 100%);
-  --grad-chrome-bar: linear-gradient(180deg, #F5F5F7 0%, #D0D2D8 30%, #8A8C92 70%, #5A5C62 100%);
-  --grad-chrome-deep: linear-gradient(180deg, #4A4C52 0%, #2A2C30 50%, #0A0A0A 100%);
-  --grad-chrome-cta: linear-gradient(135deg, #F0F0F4 0%, #C8CAD0 40%, #9B9DA3 70%, #6A6C72 100%);
-
-  /* Background atmosphere */
-  --bg-glow: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(232, 232, 236, 0.06), transparent 60%);
-  --bg-fade: linear-gradient(180deg, #0A0A0A 0%, #0F0F10 40%, #0A0A0A 100%);
-
-  /* Shadows */
-  --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.5);
-  --shadow-cta: 0 8px 28px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.15);
-  --shadow-chrome-glow: 0 0 32px rgba(200, 202, 208, 0.18), 0 8px 28px rgba(0, 0, 0, 0.55);
-
-  /* Grain opacity */
-  --grain-opacity: 0.06;
-  --grain-blend: overlay;
-
-  /* SVG logo gradient stops (4-stop chrome) — dark theme: bright-to-dark chrome */
-  --svg-chrome-1: #FFFFFF;
-  --svg-chrome-2: #C8CAD0;
-  --svg-chrome-3: #6A6C72;
-  --svg-chrome-4: #2E3036;
-  /* Bar gradient (light silver to mid steel — same in both themes for readability) */
-  --svg-bar-1: #F5F5F7;
-  --svg-bar-2: #D0D2D8;
-  --svg-bar-3: #8A8C92;
-  --svg-bar-4: #5A5C62;
+  /* === Glass blur strengths === */
+  --blur-thin: saturate(180%) blur(20px);
+  --blur-regular: saturate(180%) blur(28px);
+  --blur-thick: saturate(180%) blur(40px);
+  --blur-ultra: saturate(200%) blur(60px);
 }
 
+/* === DARK MODE (default) === */
+:root {
+  /* Base layers */
+  --bg-base: #000000;
+  --bg-elevated: #1C1C1E;
+  --bg-secondary: #2C2C2E;
+  --bg-tertiary: #3A3A3C;
+
+  /* iOS dark surfaces */
+  --surface-glass: rgba(28, 28, 30, 0.62);
+  --surface-glass-bright: rgba(44, 44, 46, 0.68);
+  --surface-glass-thin: rgba(20, 20, 22, 0.45);
+  --surface-elevated: rgba(28, 28, 30, 0.88);
+
+  /* Chrome scale */
+  --chrome-100: #FFFFFF;
+  --chrome-200: #F2F2F7;
+  --chrome-300: #E5E5EA;
+  --chrome-400: #C7C7CC;
+  --chrome-500: #AEAEB2;
+  --chrome-600: #8E8E93;
+  --chrome-700: #636366;
+  --chrome-800: #48484A;
+  --chrome-900: #2C2C2E;
+
+  /* iOS semantic text */
+  --label: #FFFFFF;
+  --label-secondary: rgba(235, 235, 245, 0.6);
+  --label-tertiary: rgba(235, 235, 245, 0.3);
+  --label-quaternary: rgba(235, 235, 245, 0.18);
+
+  /* Borders / separators */
+  --separator: rgba(84, 84, 88, 0.65);
+  --separator-opaque: #38383A;
+  --hairline: rgba(255, 255, 255, 0.08);
+  --hairline-bright: rgba(255, 255, 255, 0.14);
+
+  /* Gradients */
+  --grad-text-hero: linear-gradient(180deg, #FFFFFF 0%, #C7C7CC 35%, #8E8E93 65%, #48484A 100%);
+  --grad-text-accent: linear-gradient(180deg, #FFFFFF 0%, #AEAEB2 50%, #636366 100%);
+  --grad-chrome-cta: linear-gradient(180deg, #F2F2F7 0%, #E5E5EA 35%, #AEAEB2 70%, #8E8E93 100%);
+  --grad-chrome-cta-hover: linear-gradient(180deg, #FFFFFF 0%, #F2F2F7 35%, #C7C7CC 70%, #AEAEB2 100%);
+  --grad-bg: radial-gradient(ellipse 100% 60% at 50% 0%, rgba(255, 255, 255, 0.04), transparent 70%);
+  --grad-bg-glow2: radial-gradient(ellipse 60% 40% at 80% 100%, rgba(10, 132, 255, 0.06), transparent 60%);
+
+  /* Shadows */
+  --shadow-card: 0 1px 0 rgba(255,255,255,0.08) inset, 0 0 0 0.5px rgba(255,255,255,0.05), 0 12px 40px rgba(0,0,0,0.5);
+  --shadow-cta: 0 1px 0 rgba(255,255,255,0.4) inset, 0 0 0 0.5px rgba(0,0,0,0.4), 0 8px 24px rgba(0,0,0,0.4);
+  --shadow-floating: 0 1px 0 rgba(255,255,255,0.1) inset, 0 16px 48px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.3);
+  --shadow-tab: 0 1px 0 rgba(255,255,255,0.5) inset, 0 0 0 0.5px rgba(0,0,0,0.2), 0 4px 12px rgba(0,0,0,0.25);
+
+  /* Status bar */
+  --status-bg: rgba(0, 0, 0, 0.78);
+  --status-border: rgba(255, 255, 255, 0.08);
+
+  /* SVG logo gradients */
+  --svg-chrome-1: #FFFFFF;
+  --svg-chrome-2: #C7C7CC;
+  --svg-chrome-3: #636366;
+  --svg-chrome-4: #2C2C2E;
+  --svg-bar-1: #F2F2F7;
+  --svg-bar-2: #C7C7CC;
+  --svg-bar-3: #8E8E93;
+  --svg-bar-4: #5A5C62;
+
+  /* Glow */
+  --glow-chrome: 0 0 60px rgba(199, 199, 204, 0.18);
+}
+
+/* === LIGHT MODE === */
 @media (prefers-color-scheme: light) {
   :root {
-    --bg-base: #F5F5F3;
-    --bg-surface: #FFFFFF;
+    --bg-base: #F2F2F7;
+    --bg-elevated: #FFFFFF;
+    --bg-secondary: #F2F2F7;
+    --bg-tertiary: #FFFFFF;
 
     --surface-glass: rgba(255, 255, 255, 0.72);
-    --surface-glass-bright: rgba(255, 255, 255, 0.88);
-    --surface-elevated: #FFFFFF;
+    --surface-glass-bright: rgba(255, 255, 255, 0.86);
+    --surface-glass-thin: rgba(255, 255, 255, 0.55);
+    --surface-elevated: rgba(255, 255, 255, 0.94);
 
-    /* Chrome scale inverts (now represents dark-polished-steel) */
-    --chrome-high: #0A0A0A;
-    --chrome-bright: #2A2C30;
-    --chrome: #4A4C52;
-    --chrome-mid: #6A6C72;
-    --chrome-dim: #9B9DA3;
-    --chrome-deep: #C8CAD0;
-    --chrome-shadow: #E8E8EC;
+    --chrome-100: #000000;
+    --chrome-200: #1C1C1E;
+    --chrome-300: #2C2C2E;
+    --chrome-400: #3A3A3C;
+    --chrome-500: #48484A;
+    --chrome-600: #636366;
+    --chrome-700: #8E8E93;
+    --chrome-800: #AEAEB2;
+    --chrome-900: #E5E5EA;
 
-    --text-primary: #0A0A0A;
-    --text-secondary: #4A4C52;
-    --text-muted: #8A8C92;
-    --text-on-chrome: #F5F5F7;  /* light text on dark chrome bars */
+    --label: #000000;
+    --label-secondary: rgba(60, 60, 67, 0.6);
+    --label-tertiary: rgba(60, 60, 67, 0.3);
+    --label-quaternary: rgba(60, 60, 67, 0.18);
 
-    --border-thin: rgba(0, 0, 0, 0.1);
-    --border-chrome: rgba(42, 44, 48, 0.28);
-    --border-chrome-bright: rgba(10, 10, 10, 0.45);
+    --separator: rgba(60, 60, 67, 0.36);
+    --separator-opaque: #C6C6C8;
+    --hairline: rgba(0, 0, 0, 0.08);
+    --hairline-bright: rgba(0, 0, 0, 0.14);
 
-    --grad-text-hero: linear-gradient(180deg, #0A0A0A 0%, #2E3036 45%, #6A6C72 65%, #A8AAB0 100%);
-    --grad-text-accent: linear-gradient(180deg, #0A0A0A 0%, #2A2C30 50%, #5A5C62 100%);
-    --grad-chrome-bar: linear-gradient(180deg, #3A3C42 0%, #1E1E22 45%, #0A0A0A 100%);
-    --grad-chrome-deep: linear-gradient(180deg, #E8E8EC 0%, #BFC1C7 50%, #8A8C92 100%);
-    --grad-chrome-cta: linear-gradient(135deg, #2E3036 0%, #1A1A1D 50%, #0A0A0A 100%);
+    --grad-text-hero: linear-gradient(180deg, #000000 0%, #1C1C1E 35%, #48484A 65%, #8E8E93 100%);
+    --grad-text-accent: linear-gradient(180deg, #000000 0%, #2C2C2E 50%, #636366 100%);
+    --grad-chrome-cta: linear-gradient(180deg, #2C2C2E 0%, #1C1C1E 50%, #000000 100%);
+    --grad-chrome-cta-hover: linear-gradient(180deg, #48484A 0%, #2C2C2E 50%, #1C1C1E 100%);
+    --grad-bg: radial-gradient(ellipse 100% 60% at 50% 0%, rgba(0, 0, 0, 0.025), transparent 70%);
+    --grad-bg-glow2: radial-gradient(ellipse 60% 40% at 80% 100%, rgba(10, 132, 255, 0.04), transparent 60%);
 
-    --bg-glow: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(42, 44, 48, 0.04), transparent 60%);
-    --bg-fade: linear-gradient(180deg, #F5F5F3 0%, #EDEDEB 40%, #F5F5F3 100%);
+    --shadow-card: 0 1px 0 rgba(255,255,255,0.5) inset, 0 0 0 0.5px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+    --shadow-cta: 0 1px 0 rgba(255,255,255,0.2) inset, 0 0 0 0.5px rgba(0,0,0,0.1), 0 8px 20px rgba(0,0,0,0.18);
+    --shadow-floating: 0 1px 0 rgba(255,255,255,0.5) inset, 0 12px 40px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+    --shadow-tab: 0 1px 0 rgba(255,255,255,0.6) inset, 0 0 0 0.5px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.08);
 
-    --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0,0,0,0.04);
-    --shadow-cta: 0 8px 28px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255,255,255,0.2);
-    --shadow-chrome-glow: 0 0 32px rgba(42, 44, 48, 0.1), 0 8px 28px rgba(0, 0, 0, 0.1);
+    --status-bg: rgba(0, 0, 0, 0.85);  /* Dynamic Island always dark */
+    --status-border: rgba(255, 255, 255, 0.08);
 
-    --grain-opacity: 0.035;
-    --grain-blend: multiply;
-
-    /* SVG logo — light theme: darker chrome border so shield pops on white */
     --svg-chrome-1: #5A5C62;
-    --svg-chrome-2: #2A2C30;
-    --svg-chrome-3: #1A1A1D;
-    --svg-chrome-4: #0A0A0A;
-    /* Bars keep the same silver gradient — the black shield body behind gives consistent contrast */
+    --svg-chrome-2: #2C2C2E;
+    --svg-chrome-3: #1C1C1E;
+    --svg-chrome-4: #000000;
+
+    --glow-chrome: 0 0 40px rgba(0, 0, 0, 0.05);
   }
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--ios-blue);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
 
 html, body {
   background: var(--bg-base);
-  color: var(--text-primary);
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.5;
+  color: var(--label);
+  font-family: var(--font-sf-text);
+  font-size: 17px;
+  line-height: 1.47;
+  letter-spacing: -0.022em;  /* iOS optical letter-spacing */
   overscroll-behavior: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
@@ -490,95 +526,92 @@ body {
   min-height: 100dvh;
   padding-bottom: var(--action-bar-h);
   background:
-    var(--bg-glow),
-    /* brushed metal vertical lines */
-    repeating-linear-gradient(
-      90deg,
-      rgba(255,255,255,0.006) 0px,
-      rgba(255,255,255,0.006) 1px,
-      transparent 1px,
-      transparent 3px
-    ),
-    var(--bg-fade);
+    var(--grad-bg),
+    var(--grad-bg-glow2),
+    var(--bg-base);
   background-attachment: fixed;
+  position: relative;
 }
 
-/* Grain overlay */
+/* Subtle film grain — premium iOS feel */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 1;
-  opacity: var(--grain-opacity);
-  mix-blend-mode: var(--grain-blend);
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* Smooth scroll */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* ============================================================
-   TOP STATUS NAV (Dynamic Island inspired)
+   STATUS PILL (iOS 18 Dynamic Island)
    ============================================================ */
-.top-nav {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  padding: calc(var(--safe-top) + 10px) 16px 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-.top-nav-inner {
-  pointer-events: auto;
+.status-pill {
+  position: fixed;
+  top: calc(var(--safe-top) + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 9px 16px;
-  background: rgba(10, 10, 10, 0.78);
-  -webkit-backdrop-filter: var(--glass-blur-heavy);
-  backdrop-filter: var(--glass-blur-heavy);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 8px;
+  padding: 8px 14px 8px 12px;
+  background: var(--status-bg);
+  -webkit-backdrop-filter: var(--blur-thick);
+  backdrop-filter: var(--blur-thick);
+  border: 0.5px solid var(--status-border);
   border-radius: 999px;
-  box-shadow:
-    0 8px 28px rgba(0,0,0,0.5),
-    inset 0 1px 0 rgba(255,255,255,0.08);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.06) inset;
+  animation: statusFadeIn 600ms cubic-bezier(.16,1,.3,1) both;
 }
-.top-nav-flame {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #F5F5F7, #9B9DA3);
-  box-shadow: 0 0 10px rgba(232, 232, 236, 0.55);
+@keyframes statusFadeIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
-.top-nav-text {
-  font-family: var(--font-display);
-  font-size: 13px;
-  letter-spacing: 0.14em;
-  color: #E8E8EC;  /* always-light on dark pill */
-}
-.top-nav-text .bright { color: #FFFFFF; }
-.top-nav-sep {
-  width: 1px;
-  height: 14px;
-  background: rgba(255,255,255,0.2);
-}
-.top-nav-status-text {
-  font-family: var(--font-heading);
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  color: #9B9DA3;  /* always-mid on dark pill */
-}
-.top-nav-status {
+.status-dot-live {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #22c55e;
-  box-shadow: 0 0 8px #22c55e;
-  animation: pulseDot 2s infinite;
+  background: #30D158; /* iOS green */
+  box-shadow: 0 0 6px rgba(48, 209, 88, 0.8);
+  animation: livePulse 2s ease-in-out infinite;
 }
-@keyframes pulseDot {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+@keyframes livePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.85); }
+}
+.status-text {
+  font-family: var(--font-sf);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.08px;
+  color: #FFFFFF;
+}
+.status-text .accent { color: rgba(255,255,255,0.75); font-weight: 500; }
+.status-divider {
+  width: 1px;
+  height: 12px;
+  background: rgba(255,255,255,0.18);
+}
+.status-meta {
+  font-family: var(--font-sf);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
 }
 
 /* ============================================================
@@ -587,98 +620,111 @@ body::before {
 .hero {
   position: relative;
   z-index: 2;
-  padding: 16px 20px 28px;
+  padding: calc(var(--safe-top) + 80px) 20px 32px;
   text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
 }
 
 .logo-wrap {
   display: flex;
   justify-content: center;
-  margin-top: 16px;
-  margin-bottom: 28px;
-  filter: drop-shadow(0 20px 40px rgba(200, 202, 208, 0.25));
-  animation: logoIn 900ms cubic-bezier(.2,.8,.2,1) both;
+  margin-top: 8px;
+  margin-bottom: 32px;
+  filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.4));
+  animation: logoIn 1000ms cubic-bezier(.16,1,.3,1) both;
+}
+@media (prefers-color-scheme: light) {
+  .logo-wrap { filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.18)); }
 }
 @keyframes logoIn {
-  from { transform: translateY(12px) scale(0.94); opacity: 0; }
+  from { transform: translateY(16px) scale(0.94); opacity: 0; }
   to { transform: translateY(0) scale(1); opacity: 1; }
 }
 
 .hero-logo {
-  width: min(280px, 68vw);
+  width: min(260px, 64vw);
   height: auto;
 }
 
+/* iOS-style large title */
 .hero-tagline {
-  font-family: var(--font-display);
-  font-size: clamp(30px, 8.5vw, 46px);
-  line-height: 0.95;
-  letter-spacing: 0.01em;
+  font-family: var(--font-sf);
+  font-size: clamp(40px, 11vw, 56px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
   background: var(--grad-text-hero);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  margin-bottom: 14px;
-  animation: fadeUp 700ms 200ms cubic-bezier(.2,.8,.2,1) both;
+  margin-bottom: 16px;
+  animation: fadeUp 800ms 200ms cubic-bezier(.16,1,.3,1) both;
 }
-.hero-tagline .flame {
-  display: inline-block;
+.hero-tagline .accent {
   background: var(--grad-text-accent);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
+/* iOS subhead */
 .hero-sub {
-  font-family: var(--font-heading);
-  font-size: 13px;
+  font-family: var(--font-sf);
+  font-size: 17px;
+  font-weight: 600;
   letter-spacing: 0.32em;
-  color: var(--chrome-mid);
+  color: var(--label-secondary);
   text-transform: uppercase;
-  animation: fadeUp 700ms 300ms both;
+  animation: fadeUp 800ms 320ms cubic-bezier(.16,1,.3,1) both;
 }
 .hero-sub .sep {
-  color: var(--chrome);
-  margin: 0 10px;
-  font-size: 10px;
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  margin: 0 12px;
   vertical-align: middle;
+  opacity: 0.5;
 }
 
 .hero-loc {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--chrome-mid);
-  padding: 6px 14px;
-  background: rgba(200, 202, 208, 0.08);
-  border: 1px solid rgba(200, 202, 208, 0.22);
+  margin-top: 20px;
+  padding: 8px 14px;
+  font-family: var(--font-sf);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.08px;
+  color: var(--label-secondary);
+  background: var(--surface-glass);
+  -webkit-backdrop-filter: var(--blur-thin);
+  backdrop-filter: var(--blur-thin);
+  border: 0.5px solid var(--hairline);
   border-radius: 999px;
-  margin-top: 18px;
-  animation: fadeUp 700ms 400ms both;
+  animation: fadeUp 800ms 400ms cubic-bezier(.16,1,.3,1) both;
 }
-.hero-loc svg { opacity: 0.9; }
+.hero-loc svg { width: 13px; height: 13px; opacity: 0.7; fill: currentColor; }
 
 @keyframes fadeUp {
-  from { transform: translateY(10px); opacity: 0; }
+  from { transform: translateY(12px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
 
 /* ============================================================
-   CTA BUTTONS (primary)
+   PRIMARY CTAS — iOS 18 button style with liquid glass
    ============================================================ */
 .cta-stack {
   display: grid;
-  gap: 12px;
-  margin-top: 28px;
-  max-width: 440px;
+  gap: 10px;
+  margin-top: 32px;
+  max-width: 460px;
   margin-left: auto;
   margin-right: auto;
-  animation: fadeUp 700ms 500ms both;
+  animation: fadeUp 800ms 500ms cubic-bezier(.16,1,.3,1) both;
 }
 
 .cta {
@@ -686,286 +732,319 @@ body::before {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 18px 22px;
-  border-radius: 18px;
-  font-family: var(--font-display);
+  min-height: 56px;
+  padding: 14px 22px;
+  border-radius: 16px;
+  font-family: var(--font-sf);
   font-size: 17px;
-  letter-spacing: 0.1em;
+  font-weight: 600;
+  letter-spacing: -0.43px;
   text-decoration: none;
-  color: #fff;
   position: relative;
   overflow: hidden;
-  transition: transform 160ms ease, box-shadow 200ms ease, filter 200ms ease;
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--border-thin);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 4px 20px rgba(0,0,0,0.3);
+  border: 0;
+  transition: transform 200ms cubic-bezier(.16,1,.3,1), box-shadow 200ms ease, filter 200ms ease;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
 }
-.cta::before {
+.cta::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: inherit;
-  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, transparent 35%);
+  pointer-events: none;
 }
-.cta:active { transform: scale(0.97); }
+.cta:active {
+  transform: scale(0.96);
+  filter: brightness(1.05);
+}
 
 .cta-pay {
-  background: linear-gradient(135deg, #00D632 0%, #00A826 100%);
-  border-color: rgba(0, 214, 50, 0.5);
+  color: #FFFFFF;
+  background: linear-gradient(180deg, #34D058 0%, #00D632 35%, #00B82E 70%, #00A02A 100%);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.3),
-    0 0 0 1px rgba(0, 214, 50, 0.25),
-    0 8px 32px rgba(0, 214, 50, 0.35),
-    0 4px 12px rgba(0,0,0,0.4);
-  animation: payPulse 2.4s ease-in-out infinite;
+    0 1px 0 rgba(255,255,255,0.4) inset,
+    0 0 0 0.5px rgba(0,0,0,0.2),
+    0 8px 24px rgba(0, 214, 50, 0.35);
 }
-@keyframes payPulse {
-  0%, 100% { box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 0 0 1px rgba(0, 214, 50, 0.25), 0 8px 32px rgba(0, 214, 50, 0.35), 0 4px 12px rgba(0,0,0,0.4); }
-  50% { box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 0 0 1px rgba(0, 214, 50, 0.4), 0 10px 40px rgba(0, 214, 50, 0.55), 0 4px 12px rgba(0,0,0,0.4); }
+.cta-pay::before {
+  content: '$';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.22);
+  font-family: var(--font-sf-rounded);
+  font-weight: 800;
+  font-size: 16px;
+  margin-right: 4px;
 }
-.cta-pay .cta-icon {
-  font-family: var(--font-display);
-  font-size: 22px;
+.cta-pay .chip {
+  font-family: var(--font-sf);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 3px 8px;
+  background: rgba(0,0,0,0.22);
+  border-radius: 8px;
+  margin-left: 6px;
+  text-transform: uppercase;
 }
 
 .cta-call {
+  color: var(--bg-base);
   background: var(--grad-chrome-cta);
-  border-color: var(--border-chrome-bright);
-  color: var(--text-on-chrome);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.3),
-    0 0 0 1px var(--border-chrome),
-    0 8px 28px rgba(0, 0, 0, 0.35),
-    0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: var(--shadow-cta);
 }
-.cta-call svg { fill: var(--text-on-chrome); }
+.cta-call svg { fill: var(--bg-base); }
 
-.cta-book {
+.cta-text {
+  color: var(--label);
   background: var(--surface-glass-bright);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--border-chrome);
-  color: var(--text-primary);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.08),
-    0 4px 16px rgba(0,0,0,0.2);
+  -webkit-backdrop-filter: var(--blur-regular);
+  backdrop-filter: var(--blur-regular);
+  border: 0.5px solid var(--hairline-bright);
+  box-shadow: var(--shadow-card);
 }
-.cta-book svg { fill: var(--text-primary); }
-.cta-book::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent 40%);
-  pointer-events: none;
-}
+.cta-text svg { fill: var(--label); }
 
-.cta-chip {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  color: rgba(255,255,255,0.85);
-  padding: 3px 8px;
-  background: rgba(0,0,0,0.25);
+.cta svg { width: 20px; height: 20px; }
+
+/* ============================================================
+   INSTALL CHIP — iOS Add to Home Screen
+   ============================================================ */
+.install-chip {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  margin: 18px auto 0;
+  padding: 10px 16px;
+  background: var(--surface-glass);
+  -webkit-backdrop-filter: var(--blur-regular);
+  backdrop-filter: var(--blur-regular);
+  border: 0.5px solid var(--hairline);
   border-radius: 999px;
-  margin-left: 4px;
+  font-family: var(--font-sf);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.15px;
+  color: var(--label);
+  cursor: pointer;
+  transition: transform 160ms ease;
+  box-shadow: var(--shadow-card);
 }
-
-.surcharge-note {
-  margin-top: 10px;
-  font-family: var(--font-body);
-  font-size: 11px;
-  letter-spacing: 0.08em;
+.install-chip.visible { display: inline-flex; animation: fadeUp 600ms ease both; }
+.install-chip:active { transform: scale(0.96); }
+.install-chip svg { width: 16px; height: 16px; fill: currentColor; }
+.install-chip .platform {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 2px 7px;
+  background: var(--bg-tertiary);
+  color: var(--label-secondary);
+  border-radius: 6px;
   text-transform: uppercase;
-  color: var(--chrome-mid);
-  opacity: 0.8;
 }
 
 /* ============================================================
-   SECTION HEADERS
+   FINE PRINT (subtitle under CTAs)
+   ============================================================ */
+.fine-note {
+  margin-top: 14px;
+  font-family: var(--font-sf);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.08px;
+  color: var(--label-tertiary);
+  animation: fadeUp 800ms 600ms cubic-bezier(.16,1,.3,1) both;
+}
+
+/* ============================================================
+   SECTIONS
    ============================================================ */
 .section {
   position: relative;
   z-index: 2;
-  padding: 36px 20px 12px;
+  padding: 48px 20px 16px;
   max-width: 720px;
   margin: 0 auto;
+  scroll-margin-top: calc(var(--safe-top) + 80px);
 }
 
-.section-title {
-  font-family: var(--font-display);
-  font-size: clamp(26px, 6vw, 34px);
-  letter-spacing: 0.04em;
-  color: var(--chrome-bright);
+.section-head {
   text-align: center;
-  margin-bottom: 8px;
-  position: relative;
+  margin-bottom: 28px;
+}
+.section-eyebrow {
   display: inline-block;
-  width: 100%;
+  font-family: var(--font-sf);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--label-tertiary);
+  margin-bottom: 8px;
+}
+.section-title {
+  font-family: var(--font-sf);
+  font-size: clamp(28px, 7vw, 36px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--label);
 }
 .section-title .accent {
-  color: var(--chrome-bright);
-  text-shadow: 0 0 20px rgba(200, 202, 208, 0.5);
-}
-.section-kicker {
-  font-family: var(--font-heading);
-  font-size: 12px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--chrome);
-  text-align: center;
-  margin-bottom: 6px;
-}
-
-.section-divider {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  justify-content: center;
-  margin: 0 auto 20px;
-  max-width: 360px;
-}
-.section-divider::before,
-.section-divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(200, 202, 208, 0.4), transparent);
-}
-.section-divider-dot {
-  width: 6px; height: 6px;
-  background: var(--chrome);
-  transform: rotate(45deg);
-  box-shadow: 0 0 10px rgba(200, 202, 208, 0.8);
+  background: var(--grad-text-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 /* ============================================================
-   SERVICE TABS
+   SEGMENTED CONTROL (iOS-native tabs)
    ============================================================ */
-.tabs {
+.segments {
   display: flex;
-  gap: 6px;
-  padding: 6px;
-  background: var(--surface-glass);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--border-thin);
-  border-radius: 18px;
-  margin-bottom: 22px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 8px 24px rgba(0,0,0,0.4);
+  gap: 2px;
+  padding: 2px;
+  background: var(--surface-glass-thin);
+  -webkit-backdrop-filter: var(--blur-thin);
+  backdrop-filter: var(--blur-thin);
+  border: 0.5px solid var(--hairline);
+  border-radius: 14px;
+  margin-bottom: 20px;
+  max-width: 460px;
+  margin-left: auto;
+  margin-right: auto;
 }
-.tab {
+.segment {
   flex: 1;
   background: transparent;
   border: 0;
-  padding: 14px 8px;
-  border-radius: 14px;
+  padding: 10px 8px;
+  border-radius: 12px;
   cursor: pointer;
-  font-family: var(--font-heading);
-  font-size: 14px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--chrome-mid);
-  transition: all 220ms cubic-bezier(.2,.8,.2,1);
+  font-family: var(--font-sf);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.08px;
+  color: var(--label-secondary);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
+  transition: color 180ms ease;
+  position: relative;
 }
-.tab-icon {
-  font-size: 22px;
-  line-height: 1;
-  filter: grayscale(100%) opacity(0.6);
-  transition: filter 220ms;
+.segment .seg-icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  opacity: 0.85;
 }
-.tab.active {
-  background: var(--grad-chrome-cta);
-  color: var(--text-on-chrome);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.2),
-    0 4px 16px rgba(200, 202, 208, 0.4);
+.segment.active {
+  color: var(--label);
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-tab);
 }
-.tab.active .tab-icon { filter: none; }
 
 /* ============================================================
-   PRICE MENU (typewriter — nod to original price sheets)
+   PRICE CARDS (iOS Settings-style grouped list)
    ============================================================ */
 .menu-card {
   position: relative;
-  background: var(--surface-glass);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--border-thin);
-  border-radius: 24px;
-  padding: 24px 20px 20px;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.06),
-    0 20px 60px rgba(0,0,0,0.5);
+  background: var(--bg-elevated);
+  border: 0.5px solid var(--hairline);
+  border-radius: 18px;
   overflow: hidden;
-}
-.menu-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--chrome), transparent);
+  box-shadow: var(--shadow-card);
 }
 
 .menu-header {
   text-align: center;
-  padding-bottom: 16px;
-  margin-bottom: 16px;
-  border-bottom: 2px dashed rgba(232, 232, 236, 0.15);
+  padding: 22px 20px 18px;
+  border-bottom: 0.5px solid var(--separator);
 }
 .menu-header h3 {
-  font-family: var(--font-display);
+  font-family: var(--font-sf);
   font-size: 22px;
-  letter-spacing: 0.08em;
-  color: var(--text-primary);
+  font-weight: 800;
+  letter-spacing: -0.026em;
+  color: var(--label);
 }
-.menu-header p {
-  font-family: var(--font-menu);
-  font-size: 12px;
-  color: var(--chrome-mid);
-  letter-spacing: 0.05em;
+.menu-header .menu-subtitle {
   margin-top: 4px;
+  font-family: var(--font-sf);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.08px;
+  color: var(--label-secondary);
 }
 
-.menu-list { list-style: none; }
+.effective-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 4px 10px;
+  background: var(--bg-secondary);
+  border: 0.5px solid var(--hairline);
+  border-radius: 999px;
+  font-family: var(--font-sf);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--label-secondary);
+}
+.effective-pill .year-tag {
+  font-weight: 700;
+  color: var(--label);
+}
+
+.menu-list {
+  list-style: none;
+}
 .menu-row {
   display: flex;
-  align-items: baseline;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
-  padding: 12px 0;
-  border-bottom: 1px dotted rgba(232, 232, 236, 0.12);
-  font-family: var(--font-menu);
-  font-size: 15px;
-  color: var(--chrome-bright);
+  gap: 14px;
+  padding: 14px 18px;
+  border-bottom: 0.5px solid var(--separator);
+  font-family: var(--font-sf);
 }
 .menu-row:last-child { border-bottom: 0; }
-.menu-label { flex: 1; }
+.menu-label {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.32px;
+  color: var(--label);
+  line-height: 1.3;
+}
 .menu-label .note {
   display: block;
+  margin-top: 3px;
   font-size: 12px;
-  color: var(--chrome-mid);
-  margin-top: 2px;
-  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.08px;
+  color: var(--label-secondary);
+  line-height: 1.35;
 }
 .menu-price {
-  font-family: var(--font-display);
+  font-family: var(--font-sf-rounded), var(--font-sf);
   font-size: 17px;
-  color: var(--chrome-bright);
-  letter-spacing: 0.03em;
+  font-weight: 700;
+  letter-spacing: -0.43px;
+  color: var(--label);
   white-space: nowrap;
-  text-shadow: 0 0 12px rgba(200, 202, 208, 0.3);
-}
-.menu-price .alt {
-  color: var(--chrome-bright);
-  font-family: var(--font-menu);
-  font-size: 13px;
-  margin-left: 6px;
+  flex-shrink: 0;
 }
 .menu-price.dual {
   display: flex;
@@ -975,166 +1054,162 @@ body::before {
   text-align: right;
 }
 .menu-price.dual .sub {
-  font-family: var(--font-menu);
   font-size: 12px;
-  color: var(--chrome-mid);
-  text-transform: none;
-  letter-spacing: 0;
+  font-weight: 500;
+  color: var(--label-secondary);
+  letter-spacing: -0.08px;
 }
 
-/* Fine-print inside menu (like red text on original) */
-.menu-fineprint {
-  margin-top: 18px;
-  padding-top: 16px;
-  border-top: 2px dashed rgba(200, 16, 46, 0.25);
-  font-family: var(--font-menu);
-  font-size: 13px;
-  color: var(--red-alert);
+/* Footer of menu — fine print */
+.menu-foot {
+  padding: 16px 18px 18px;
+  border-top: 0.5px solid var(--separator);
   text-align: center;
-  line-height: 1.7;
+  font-family: var(--font-sf);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.08px;
+  color: var(--label-secondary);
 }
-.menu-fineprint strong { font-weight: 700; }
-
-/* Effective year tag */
-.effective-year {
-  display: inline-flex !important;
-  align-items: center;
-  gap: 6px;
-  margin-top: 10px !important;
-  padding: 4px 12px;
-  background: rgba(200, 202, 208, 0.12);
-  border: 1px solid rgba(200, 202, 208, 0.35);
-  border-radius: 999px;
-  font-family: var(--font-heading) !important;
-  font-size: 11px !important;
-  letter-spacing: 0.2em !important;
-  text-transform: uppercase;
-  color: var(--chrome-mid) !important;
+.menu-foot strong {
+  display: block;
+  color: var(--red-alert);
+  font-weight: 600;
+  margin-bottom: 2px;
 }
-.effective-year .year-tag {
-  font-family: var(--font-display);
-  font-size: 14px;
-  color: var(--chrome-bright);
-  letter-spacing: 0.05em;
-}
-
-/* Adjustment policy note in fine print */
-.adjust-note {
+.menu-foot .adjust-line {
   display: block;
   margin-top: 8px;
-  font-size: 11px !important;
-  letter-spacing: 0.08em;
+  padding-top: 8px;
+  border-top: 0.5px solid var(--separator);
+  font-size: 11px;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--chrome-mid) !important;
-  font-style: normal !important;
+  color: var(--label-tertiary);
 }
 
 /* Tab panel transitions */
-.panel { display: none; animation: panelIn 360ms cubic-bezier(.2,.8,.2,1); }
-.panel.active { display: block; }
+.panel { display: none; }
+.panel.active {
+  display: block;
+  animation: panelIn 360ms cubic-bezier(.16,1,.3,1);
+}
 @keyframes panelIn {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 /* ============================================================
-   HOW IT WORKS
+   HOW IT WORKS — iOS-style cards
    ============================================================ */
 .how-grid {
   display: grid;
-  gap: 12px;
-  margin-top: 8px;
+  gap: 10px;
 }
 .how-card {
   display: flex;
   gap: 14px;
   padding: 18px;
-  background: var(--surface-glass-bright);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--border-thin);
-  border-radius: 18px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+  background: var(--bg-elevated);
+  border: 0.5px solid var(--hairline);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
 }
 .how-num {
   flex-shrink: 0;
-  width: 44px; height: 44px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--grad-chrome-cta);
+  color: var(--bg-base);
   border-radius: 12px;
-  font-family: var(--font-display);
-  font-size: 20px;
-  color: var(--text-on-chrome);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 4px 14px rgba(200, 202, 208, 0.4);
+  font-family: var(--font-sf-rounded), var(--font-sf);
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -0.5px;
+  box-shadow: var(--shadow-cta);
 }
 .how-body h4 {
-  font-family: var(--font-heading);
-  font-size: 18px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--chrome-bright);
+  font-family: var(--font-sf);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.43px;
+  color: var(--label);
   margin-bottom: 4px;
 }
 .how-body p {
+  font-family: var(--font-sf);
   font-size: 14px;
-  color: var(--chrome-mid);
-  line-height: 1.55;
+  font-weight: 400;
+  letter-spacing: -0.15px;
+  color: var(--label-secondary);
+  line-height: 1.4;
 }
 
 /* ============================================================
-   CONTACT CARD
+   CONTACT CARD — iOS Settings rows
    ============================================================ */
 .contact-card {
-  padding: 22px;
-  background:
-    linear-gradient(135deg, rgba(200, 202, 208, 0.08), transparent 60%),
-    var(--surface-glass);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--border-chrome-bright);
-  border-radius: 24px;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.06),
-    0 20px 60px rgba(0,0,0,0.5),
-    0 0 0 1px rgba(200, 202, 208, 0.08);
+  background: var(--bg-elevated);
+  border: 0.5px solid var(--hairline);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
 }
 .contact-row {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 14px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 14px 18px;
+  border-bottom: 0.5px solid var(--separator);
   text-decoration: none;
   color: inherit;
-  transition: transform 160ms ease;
+  transition: background 160ms ease;
 }
-.contact-row:active { transform: scale(0.98); }
 .contact-row:last-child { border-bottom: 0; }
+.contact-row:active { background: var(--bg-secondary); }
+
 .contact-icon {
-  width: 44px; height: 44px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
-  background: rgba(200, 202, 208, 0.12);
-  border: 1px solid rgba(200, 202, 208, 0.25);
+  border-radius: 9px;
   flex-shrink: 0;
 }
-.contact-icon svg { width: 20px; height: 20px; fill: var(--chrome-bright); }
+.contact-icon svg { width: 18px; height: 18px; fill: #FFFFFF; }
+.contact-icon.phone { background: linear-gradient(180deg, #34D058, #00B82E); }
+.contact-icon.email { background: linear-gradient(180deg, #5AC8FA, #0A84FF); }
+.contact-icon.cash { background: linear-gradient(180deg, #34D058, #00A826); }
+
+.contact-meta {
+  flex: 1;
+  min-width: 0;
+}
 .contact-meta .label {
-  font-family: var(--font-heading);
-  font-size: 11px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--chrome-mid);
+  font-family: var(--font-sf);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.08px;
+  color: var(--label-secondary);
 }
 .contact-meta .value {
-  font-family: var(--font-display);
+  font-family: var(--font-sf);
   font-size: 17px;
-  color: var(--chrome-bright);
-  letter-spacing: 0.03em;
+  font-weight: 600;
+  letter-spacing: -0.43px;
+  color: var(--label);
+  word-break: break-word;
+}
+.contact-chevron {
+  width: 9px;
+  height: 14px;
+  fill: var(--label-tertiary);
+  flex-shrink: 0;
 }
 
 /* ============================================================
@@ -1143,366 +1218,454 @@ body::before {
 footer {
   padding: 32px 20px 20px;
   text-align: center;
-  color: var(--chrome-deep);
+  font-family: var(--font-sf);
   font-size: 12px;
+  font-weight: 500;
+  color: var(--label-tertiary);
   position: relative;
   z-index: 2;
 }
-footer .foot-logo {
-  font-family: var(--font-display);
-  font-size: 14px;
-  letter-spacing: 0.3em;
-  color: var(--chrome-mid);
+footer .foot-brand {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--label-secondary);
   margin-bottom: 6px;
 }
-footer .foot-logo .o { color: var(--chrome); }
 
 /* ============================================================
-   BOTTOM ACTION BAR (glass, 4 buttons — always dark like iOS Dock)
+   BOTTOM TAB BAR — iOS dock
    ============================================================ */
 .action-bar {
   position: fixed;
-  left: 12px;
-  right: 12px;
+  left: max(12px, var(--safe-left));
+  right: max(12px, var(--safe-right));
   bottom: calc(8px + var(--safe-bottom));
   z-index: 60;
   display: grid;
-  grid-template-columns: 1fr 1fr 1.4fr 1fr;
-  gap: 4px;
+  grid-template-columns: 1fr 1fr 1.3fr 1fr 1fr;
+  gap: 3px;
   padding: 8px;
-  background: rgba(10, 10, 12, 0.78);
-  -webkit-backdrop-filter: var(--glass-blur-heavy);
-  backdrop-filter: var(--glass-blur-heavy);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 24px;
+  background: var(--status-bg);
+  -webkit-backdrop-filter: var(--blur-thick);
+  backdrop-filter: var(--blur-thick);
+  border: 0.5px solid var(--status-border);
+  border-radius: 26px;
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.08),
-    0 10px 40px rgba(0,0,0,0.6),
-    0 2px 8px rgba(0,0,0,0.4);
+    0 1px 0 rgba(255,255,255,0.06) inset,
+    0 12px 40px rgba(0,0,0,0.55),
+    0 2px 8px rgba(0,0,0,0.3);
+  max-width: 600px;
+  margin: 0 auto;
 }
 .action-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  padding: 10px 6px;
+  gap: 3px;
+  padding: 8px 4px;
   border-radius: 16px;
   text-decoration: none;
-  color: #E8E8EC;  /* always-light on dark bar */
-  transition: transform 160ms ease, background 200ms ease;
-  min-height: 54px;
+  color: rgba(235, 235, 245, 0.7);
+  transition: transform 200ms cubic-bezier(.16,1,.3,1), color 180ms ease, background 180ms ease;
+  min-height: 56px;
 }
-.action-btn:active { transform: scale(0.94); }
-.action-btn svg { width: 22px; height: 22px; }
+.action-btn:active {
+  transform: scale(0.92);
+  background: rgba(255,255,255,0.06);
+}
+.action-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
 .action-btn .label {
-  font-family: var(--font-heading);
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #9B9DA3;  /* always-mid on dark bar */
+  font-family: var(--font-sf);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(235, 235, 245, 0.6);
 }
 .action-btn.pay {
-  background: linear-gradient(135deg, #00D632 0%, #00A826 100%);
+  background: linear-gradient(180deg, #34D058 0%, #00D632 35%, #00B82E 70%, #00A02A 100%);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.3),
-    0 4px 18px rgba(0, 214, 50, 0.45);
+    0 1px 0 rgba(255,255,255,0.4) inset,
+    0 0 0 0.5px rgba(0,0,0,0.2),
+    0 4px 16px rgba(0, 214, 50, 0.5);
 }
-.action-btn.pay svg { fill: #fff; }
-.action-btn.pay .label { color: #fff; font-weight: 700; }
-
-.action-btn.text svg,
-.action-btn.call svg,
-.action-btn.email svg {
-  fill: #E8E8EC;  /* always-light on dark bar */
-}
+.action-btn.pay,
+.action-btn.pay svg,
+.action-btn.pay .label { color: #FFFFFF !important; }
+.action-btn.pay .label { font-weight: 700; }
+.action-btn:not(.pay):hover { color: #FFFFFF; }
 
 /* ============================================================
-   UTIL
-   ============================================================ */
-.clip-safe { padding-inline: 20px; }
-
-@media (min-width: 640px) {
-  .tabs { max-width: 480px; margin-left: auto; margin-right: auto; }
-  .menu-card { padding: 32px 28px 28px; }
-}
-
-/* ============================================================
-   LIGHT THEME ADJUSTMENTS — remove dark-mode chrome glows that
-   don't render on white backgrounds; tighten a few shadows/borders.
-   ============================================================ */
-@media (prefers-color-scheme: light) {
-  /* Remove chrome halo effects — they only work on dark bg */
-  .section-title .accent,
-  .hero-tagline .flame,
-  .menu-price {
-    text-shadow: none;
-  }
-
-  /* Chrome glow → subtle dark shadow for depth on light bg */
-  .tab.active {
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.15),
-      0 4px 16px rgba(0, 0, 0, 0.18);
-  }
-  .how-num {
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.2),
-      0 4px 14px rgba(0, 0, 0, 0.18);
-  }
-  .section-divider-dot {
-    box-shadow: none;
-  }
-
-  /* Glass cards get a clean subtle border on light */
-  .menu-card,
-  .how-card,
-  .contact-card,
-  .tabs {
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.5),
-      0 2px 8px rgba(0,0,0,0.04),
-      0 20px 48px rgba(0,0,0,0.08);
-  }
-
-  /* Menu header dashed border (was white) needs to become dark */
-  .menu-header {
-    border-bottom-color: rgba(42, 44, 48, 0.18) !important;
-  }
-  .menu-row {
-    border-bottom-color: rgba(42, 44, 48, 0.15) !important;
-  }
-
-  /* Install chip border tint for light theme */
-  .install-chip {
-    background: var(--surface-glass-bright);
-  }
-
-  /* Body glow is lighter in light theme — already handled by --bg-glow var */
-
-  /* Section kicker — use accent color tone that works on light */
-  .section-kicker {
-    color: var(--chrome);
-  }
-
-  /* Effective year pill — darker border, darker tint */
-  .effective-year {
-    background: rgba(42, 44, 48, 0.06) !important;
-    border-color: rgba(42, 44, 48, 0.25) !important;
-  }
-  .effective-year .year-tag {
-    color: var(--chrome-bright) !important;
-  }
-
-  /* Brushed metal background effect — subtle dark lines for light theme */
-  body {
-    background:
-      var(--bg-glow),
-      repeating-linear-gradient(
-        90deg,
-        rgba(0,0,0,0.012) 0px,
-        rgba(0,0,0,0.012) 1px,
-        transparent 1px,
-        transparent 3px
-      ),
-      var(--bg-fade);
-    background-attachment: fixed;
-  }
-}
-
-/* ============================================================
-   INSTALL TO HOME SCREEN — smart device switch
-   ============================================================ */
-.install-chip {
-  display: none;  /* JS shows when applicable */
-  align-items: center;
-  gap: 10px;
-  margin: 16px auto 8px;
-  padding: 12px 18px;
-  background: rgba(255, 255, 255, 0.04);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  border: 1px solid rgba(200, 202, 208, 0.3);
-  border-radius: 14px;
-  font-family: var(--font-heading);
-  font-size: 13px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--chrome-bright);
-  cursor: pointer;
-  transition: all 200ms ease;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 16px rgba(0,0,0,0.3);
-}
-.install-chip.visible { display: inline-flex; }
-.install-chip:active { transform: scale(0.97); }
-.install-chip:hover {
-  background: rgba(200, 202, 208, 0.1);
-  border-color: rgba(200, 202, 208, 0.5);
-}
-.install-chip svg {
-  width: 18px;
-  height: 18px;
-  fill: var(--chrome-bright);
-}
-.install-chip .install-platform {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  color: var(--chrome-mid);
-  padding: 3px 8px;
-  background: rgba(0,0,0,0.3);
-  border-radius: 999px;
-  margin-left: 2px;
-}
-
-/* ============================================================
-   iOS INSTALL MODAL
+   iOS INSTALL MODAL — SHEET STYLE
    ============================================================ */
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 100;
-  background: rgba(0, 0, 0, 0.75);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
+  z-index: 200;
+  background: rgba(0,0,0,0.5);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   display: none;
   align-items: flex-end;
   justify-content: center;
-  padding: 16px;
-  animation: modalFadeIn 240ms ease;
+  padding: 0;
+  animation: fadeIn 240ms ease;
 }
 .modal-backdrop.visible { display: flex; }
-@keyframes modalFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-.modal-glass {
+.modal-sheet {
   width: 100%;
-  max-width: 440px;
-  margin-bottom: calc(var(--action-bar-h) + 12px);
-  padding: 28px 24px 24px;
-  background: var(--surface-elevated);
-  -webkit-backdrop-filter: var(--glass-blur-heavy);
-  backdrop-filter: var(--glass-blur-heavy);
-  border: 1px solid var(--border-chrome-bright);
-  border-radius: 28px;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.08),
-    0 30px 80px rgba(0,0,0,0.4);
-  animation: modalSlideUp 320ms cubic-bezier(.2,.8,.2,1);
+  max-width: 500px;
+  margin: 0 12px calc(var(--action-bar-h) + 8px);
+  padding: 24px 22px;
+  background: var(--bg-elevated);
+  -webkit-backdrop-filter: var(--blur-thick);
+  backdrop-filter: var(--blur-thick);
+  border: 0.5px solid var(--hairline);
+  border-radius: 24px;
+  box-shadow: var(--shadow-floating);
+  animation: sheetIn 360ms cubic-bezier(.16,1,.3,1);
 }
-@keyframes modalSlideUp {
-  from { transform: translateY(24px); opacity: 0; }
+@keyframes sheetIn {
+  from { transform: translateY(40px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
 
 .modal-grabber {
-  width: 40px;
-  height: 4px;
-  background: var(--chrome-dim);
-  opacity: 0.5;
-  border-radius: 2px;
+  width: 36px;
+  height: 5px;
+  background: var(--label-quaternary);
+  border-radius: 2.5px;
   margin: 0 auto 18px;
 }
 
-.modal-kicker {
-  font-family: var(--font-heading);
+.modal-eyebrow {
+  font-family: var(--font-sf);
   font-size: 12px;
-  letter-spacing: 0.3em;
+  font-weight: 700;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--chrome);
+  color: var(--label-tertiary);
   text-align: center;
   margin-bottom: 6px;
 }
 
 .modal-title {
-  font-family: var(--font-display);
+  font-family: var(--font-sf);
   font-size: 22px;
-  letter-spacing: 0.04em;
-  color: var(--text-primary);
+  font-weight: 800;
+  letter-spacing: -0.026em;
+  color: var(--label);
   text-align: center;
   margin-bottom: 22px;
   line-height: 1.2;
 }
-.modal-title .accent { color: var(--chrome); }
+.modal-title .accent {
+  background: var(--grad-text-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 
 .modal-steps {
   list-style: none;
   display: grid;
-  gap: 12px;
-  margin-bottom: 22px;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 .modal-step {
   display: flex;
   align-items: center;
   gap: 14px;
   padding: 14px;
-  background: var(--surface-glass);
-  border: 1px solid var(--border-thin);
+  background: var(--bg-secondary);
   border-radius: 14px;
 }
 .modal-step-num {
   flex-shrink: 0;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   background: var(--grad-chrome-cta);
-  color: var(--text-on-chrome);
-  font-family: var(--font-display);
+  color: var(--bg-base);
+  font-family: var(--font-sf-rounded), var(--font-sf);
+  font-weight: 800;
   font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+  letter-spacing: -0.5px;
+  box-shadow: var(--shadow-cta);
 }
 .modal-step-icon {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   flex-shrink: 0;
-  fill: var(--chrome);
+  fill: var(--label);
+  opacity: 0.85;
 }
 .modal-step-text {
-  font-family: var(--font-body);
-  font-size: 14px;
-  color: var(--text-primary);
-  line-height: 1.45;
+  font-family: var(--font-sf);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.24px;
+  color: var(--label);
+  line-height: 1.35;
 }
-.modal-step-text strong { color: var(--text-primary); font-weight: 700; }
+.modal-step-text strong { font-weight: 700; }
 
 .modal-close {
   width: 100%;
   padding: 14px;
-  font-family: var(--font-display);
-  font-size: 14px;
-  letter-spacing: 0.12em;
-  color: var(--text-on-chrome);
+  font-family: var(--font-sf);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.43px;
+  color: var(--bg-base);
   background: var(--grad-chrome-cta);
   border: 0;
   border-radius: 14px;
   cursor: pointer;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.25),
-    0 4px 16px rgba(200, 202, 208, 0.3);
+  box-shadow: var(--shadow-cta);
+  position: relative;
+  overflow: hidden;
 }
-.modal-close:active { transform: scale(0.98); }
+.modal-close::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, transparent 35%);
+  pointer-events: none;
+}
+.modal-close:active { transform: scale(0.97); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (min-width: 640px) {
+  .menu-header { padding: 28px 24px 22px; }
+  .menu-row { padding: 16px 22px; }
+  .menu-foot { padding: 18px 22px 22px; }
+  .contact-row { padding: 16px 22px; }
+}
+
+/* ============================================================
+   TIPS — iOS Settings-style disclosure groups with severity badges
+   ============================================================ */
+.tips-card {
+  background: var(--bg-elevated);
+  border: 0.5px solid var(--hairline);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 14px;
+}
+.tips-card-head {
+  padding: 18px 20px 14px;
+  border-bottom: 0.5px solid var(--separator);
+}
+.tips-card-head h3 {
+  font-family: var(--font-sf);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.026em;
+  color: var(--label);
+}
+.tips-card-head p {
+  margin-top: 4px;
+  font-family: var(--font-sf);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--label-secondary);
+  letter-spacing: -0.08px;
+}
+
+.tip-item {
+  border-bottom: 0.5px solid var(--separator);
+}
+.tip-item:last-child { border-bottom: 0; }
+
+.tip-summary {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: background 160ms ease;
+}
+.tip-summary::-webkit-details-marker { display: none; }
+.tip-summary:active { background: var(--bg-secondary); }
+
+.tip-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tip-icon svg { width: 19px; height: 19px; fill: #FFFFFF; }
+/* Color-coded severity backgrounds */
+.tip-icon.critical { background: linear-gradient(180deg, #FF6B6B, #FF3B30); }
+.tip-icon.high     { background: linear-gradient(180deg, #FFB340, #FF9500); }
+.tip-icon.medium   { background: linear-gradient(180deg, #5AC8FA, #0A84FF); }
+.tip-icon.low      { background: linear-gradient(180deg, #BF5AF2, #5E5CE6); }
+.tip-icon.routine  { background: linear-gradient(180deg, #34D058, #30D158); }
+
+.tip-meta {
+  flex: 1;
+  min-width: 0;
+}
+.tip-title {
+  font-family: var(--font-sf);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.32px;
+  color: var(--label);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.tip-interval {
+  font-family: var(--font-sf);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  background: var(--bg-secondary);
+  color: var(--label-secondary);
+  border-radius: 6px;
+}
+.tip-sub {
+  margin-top: 2px;
+  font-family: var(--font-sf);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--label-secondary);
+  letter-spacing: -0.08px;
+}
+.tip-chevron {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  fill: var(--label-tertiary);
+  transition: transform 240ms cubic-bezier(.16,1,.3,1);
+}
+.tip-item[open] .tip-chevron { transform: rotate(90deg); }
+
+.tip-detail {
+  padding: 4px 18px 18px;
+  animation: tipExpand 280ms cubic-bezier(.16,1,.3,1);
+}
+@keyframes tipExpand {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tip-section {
+  margin-top: 12px;
+  padding: 14px 16px;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+}
+.tip-section:first-child { margin-top: 0; }
+.tip-section-label {
+  font-family: var(--font-sf);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--label-tertiary);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tip-section-label svg { width: 12px; height: 12px; fill: currentColor; }
+.tip-section.danger .tip-section-label { color: var(--red-alert); }
+.tip-section.danger { background: rgba(255, 59, 48, 0.08); border: 0.5px solid rgba(255, 59, 48, 0.2); }
+.tip-section p {
+  font-family: var(--font-sf);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.15px;
+  line-height: 1.45;
+  color: var(--label);
+}
+.tip-section ul {
+  margin: 0;
+  padding-left: 18px;
+  font-family: var(--font-sf);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.15px;
+  line-height: 1.5;
+  color: var(--label);
+}
+.tip-section ul li { margin-bottom: 4px; }
+.tip-section ul li:last-child { margin-bottom: 0; }
+
+/* Tips section vehicle segments */
+.tips-segments { margin-bottom: 16px; }
+
+/* Tips intro callout */
+.tips-intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  background: var(--bg-elevated);
+  border: 0.5px solid var(--hairline);
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+}
+.tips-intro-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: linear-gradient(180deg, #5AC8FA, #0A84FF);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tips-intro-icon svg { width: 16px; height: 16px; fill: #FFFFFF; }
+.tips-intro p {
+  font-family: var(--font-sf);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.08px;
+  line-height: 1.45;
+  color: var(--label-secondary);
+}
+.tips-intro p strong { color: var(--label); font-weight: 600; }
 </style>
 </head>
 
 <body>
 
 <!-- ================================================================
-     TOP NAV
+     STATUS PILL — iOS 18 Dynamic Island
 ================================================================ -->
-<header class="top-nav">
-  <div class="top-nav-inner">
-    <span class="top-nav-flame" aria-hidden="true"></span>
-    <span class="top-nav-text">888<span class="bright">MECH</span></span>
-    <span class="top-nav-sep"></span>
-    <span class="top-nav-status-text">OPEN</span>
-    <span class="top-nav-status" aria-label="Available"></span>
-  </div>
+<header class="status-pill" role="banner">
+  <span class="status-dot-live" aria-hidden="true"></span>
+  <span class="status-text">888<span class="accent">MECH</span></span>
+  <span class="status-divider" aria-hidden="true"></span>
+  <span class="status-meta">Open · Mobile</span>
 </header>
 
 <!-- ================================================================
@@ -1510,7 +1673,6 @@ footer .foot-logo .o { color: var(--chrome); }
 ================================================================ -->
 <section class="hero">
   <div class="logo-wrap">
-    <!-- Clean bar-and-shield: Harley silhouette, black chrome treatment, theme-aware -->
     <svg class="hero-logo" viewBox="0 0 340 280" xmlns="http://www.w3.org/2000/svg" aria-label="888MECH logo" role="img">
       <defs>
         <linearGradient id="chromeBorder" x1="0" y1="0" x2="0" y2="1">
@@ -1531,7 +1693,7 @@ footer .foot-logo .o { color: var(--chrome); }
           <stop offset="100%" style="stop-color: var(--svg-chrome-4);"/>
         </linearGradient>
         <linearGradient id="barShine" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"  stop-color="rgba(255,255,255,0.35)"/>
+          <stop offset="0%"  stop-color="rgba(255,255,255,0.4)"/>
           <stop offset="55%" stop-color="rgba(255,255,255,0)"/>
         </linearGradient>
         <linearGradient id="innerShade" x1="0" y1="0" x2="0" y2="1">
@@ -1539,67 +1701,34 @@ footer .foot-logo .o { color: var(--chrome); }
           <stop offset="100%" stop-color="rgba(0,0,0,0.35)"/>
         </linearGradient>
         <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.5"/>
+          <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000" flood-opacity="0.45"/>
         </filter>
       </defs>
 
       <g filter="url(#softShadow)">
-        <!-- Shield outer (chrome border, black body) -->
         <path d="M 22 32 L 22 158 Q 22 214 170 258 Q 318 214 318 158 L 318 32 Q 318 16 302 16 L 38 16 Q 22 16 22 32 Z"
-              fill="#0A0A0A"
-              stroke="url(#chromeBorder)"
-              stroke-width="3.5"
-              stroke-linejoin="round"/>
-
-        <!-- Inner chrome hairline (premium detail) -->
+              fill="#0A0A0A" stroke="url(#chromeBorder)" stroke-width="3.5" stroke-linejoin="round"/>
         <path d="M 32 40 L 32 156 Q 32 208 170 248 Q 308 208 308 156 L 308 40 Q 308 28 296 28 L 44 28 Q 32 28 32 40 Z"
-              fill="none"
-              stroke="url(#chromeBorder)"
-              stroke-width="1"
-              opacity="0.35"/>
-
-        <!-- TOP CHROME BAR with 888 -->
+              fill="none" stroke="url(#chromeBorder)" stroke-width="1" opacity="0.35"/>
         <rect x="22" y="50" width="296" height="52" fill="url(#chromeBar)"/>
         <rect x="22" y="50" width="296" height="52" fill="url(#innerShade)" opacity="0.4"/>
         <rect x="24" y="52" width="292" height="10" fill="url(#barShine)"/>
         <line x1="22" y1="50" x2="318" y2="50" stroke="#0A0A0A" stroke-width="1.5"/>
         <line x1="22" y1="102" x2="318" y2="102" stroke="#0A0A0A" stroke-width="1.5"/>
-
-        <!-- 888 -->
-        <text x="170" y="90"
-              text-anchor="middle"
-              font-family="Bungee, Impact, sans-serif"
-              font-size="42"
-              fill="#0A0A0A"
-              letter-spacing="4">888</text>
-
-        <!-- Thin black band: MOBILE MECHANICS -->
+        <text x="170" y="90" text-anchor="middle"
+              font-family="Bungee, Impact, sans-serif" font-size="42"
+              fill="#0A0A0A" letter-spacing="4">888</text>
         <rect x="22" y="108" width="296" height="20" fill="#0A0A0A"/>
-        <text x="170" y="123"
-              text-anchor="middle"
-              font-family="Staatliches, Impact, sans-serif"
-              font-size="13"
-              fill="url(#chromeText)"
-              letter-spacing="5">MOBILE MECHANICS</text>
-
-        <!-- BOTTOM CHROME SHIELD with MECH -->
-        <path d="M 22 134 L 318 134 L 318 158 Q 318 214 170 258 Q 22 214 22 158 Z"
-              fill="url(#chromeBar)"/>
-        <path d="M 22 134 L 318 134 L 318 158 Q 318 214 170 258 Q 22 214 22 158 Z"
-              fill="url(#innerShade)"
-              opacity="0.35"/>
+        <text x="170" y="123" text-anchor="middle"
+              font-family="Staatliches, Impact, sans-serif" font-size="13"
+              fill="url(#chromeText)" letter-spacing="5">MOBILE MECHANICS</text>
+        <path d="M 22 134 L 318 134 L 318 158 Q 318 214 170 258 Q 22 214 22 158 Z" fill="url(#chromeBar)"/>
+        <path d="M 22 134 L 318 134 L 318 158 Q 318 214 170 258 Q 22 214 22 158 Z" fill="url(#innerShade)" opacity="0.35"/>
         <rect x="24" y="136" width="292" height="8" fill="url(#barShine)"/>
         <line x1="22" y1="134" x2="318" y2="134" stroke="#0A0A0A" stroke-width="1.5"/>
-
-        <!-- MECH -->
-        <text x="170" y="188"
-              text-anchor="middle"
-              font-family="Bungee, Impact, sans-serif"
-              font-size="44"
-              fill="#0A0A0A"
-              letter-spacing="10">MECH</text>
-
-        <!-- Chrome rivets -->
+        <text x="170" y="188" text-anchor="middle"
+              font-family="Bungee, Impact, sans-serif" font-size="44"
+              fill="#0A0A0A" letter-spacing="10">MECH</text>
         <circle cx="44" cy="40" r="2.2" fill="url(#chromeBorder)"/>
         <circle cx="296" cy="40" r="2.2" fill="url(#chromeBorder)"/>
         <circle cx="44" cy="148" r="2.2" fill="url(#chromeBorder)"/>
@@ -1608,79 +1737,72 @@ footer .foot-logo .o { color: var(--chrome); }
     </svg>
   </div>
 
-  <h1 class="hero-tagline">
-    WE COME <span class="flame">TO YOU</span>
-  </h1>
-  <p class="hero-sub">CARS <span class="sep">●</span> TRUCKS <span class="sep">●</span> BIKES</p>
-  <div class="hero-loc">
-    <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>
+  <h1 class="hero-tagline">We come <span class="accent">to you.</span></h1>
+  <p class="hero-sub">Cars <span class="sep"></span> Trucks <span class="sep"></span> Bikes</p>
+  <span class="hero-loc">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>
     Scranton · NEPA Mobile Service
-  </div>
+  </span>
 
   <div class="cta-stack">
     <a href="https://cash.app/$Triple888mech" class="cta cta-pay" target="_blank" rel="noopener">
-      <span class="cta-icon">$</span>
-      PAY NOW
-      <span class="cta-chip">CASH APP</span>
+      Pay Now
+      <span class="chip">Cash App</span>
     </a>
     <a href="tel:+15706148445" class="cta cta-call">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.58l2.2-2.21a.96.96 0 00.25-1c-.38-1.12-.58-2.32-.58-3.57a1 1 0 00-1-1H4a1 1 0 00-1 1c0 9.39 7.61 17 17 17a1 1 0 001-1v-3.5a1 1 0 00-1-1z"/></svg>
-      CALL NOW
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.58l2.2-2.21a.96.96 0 00.25-1c-.38-1.12-.58-2.32-.58-3.57a1 1 0 00-1-1H4a1 1 0 00-1 1c0 9.39 7.61 17 17 17a1 1 0 001-1v-3.5a1 1 0 00-1-1z"/></svg>
+      Call Now
     </a>
-    <a href="sms:+15706148445" class="cta cta-book">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 2H4a2 2 0 00-2 2v18l4-4h14a2 2 0 002-2V4a2 2 0 00-2-2zM7 9h10v2H7V9zm6 5H7v-2h6v2zm4-8H7V4h10v2z"/></svg>
-      TEXT TO BOOK
+    <a href="sms:+15706148445" class="cta cta-text">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 2H4a2 2 0 00-2 2v18l4-4h14a2 2 0 002-2V4a2 2 0 00-2-2zM7 9h10v2H7V9zm6 5H7v-2h6v2zm4-8H7V4h10v2z"/></svg>
+      Text to Book
     </a>
   </div>
-  <!-- Smart install button — switches between Android native prompt and iOS instructions modal -->
+
   <button class="install-chip" id="install-btn" type="button" aria-label="Install 888MECH app to home screen">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5v-2z"/></svg>
     <span>Save to Home Screen</span>
-    <span class="install-platform" id="install-platform">App</span>
+    <span class="platform" id="install-platform">App</span>
   </button>
 
-  <p class="surcharge-note">4.9% surcharge on app payments · Parts & fluids by customer</p>
+  <p class="fine-note">4.9% surcharge on app payments · Parts &amp; fluids by customer</p>
 </section>
 
 <!-- ================================================================
      SERVICES
 ================================================================ -->
 <section class="section">
-  <p class="section-kicker">Menu of Services</p>
-  <h2 class="section-title">FLAT <span class="accent">RATES</span></h2>
-  <div class="section-divider">
-    <span class="section-divider-dot"></span>
+  <div class="section-head">
+    <div class="section-eyebrow">Menu of Services</div>
+    <h2 class="section-title">Flat <span class="accent">Rates</span></h2>
   </div>
 
-  <div class="tabs" role="tablist">
-    <button class="tab active" data-panel="cars" role="tab" aria-selected="true">
-      <span class="tab-icon">🚗</span>
-      Cars
-    </button>
-    <button class="tab" data-panel="trucks" role="tab">
-      <span class="tab-icon">🚚</span>
-      Trucks
-    </button>
-    <button class="tab" data-panel="bikes" role="tab">
-      <span class="tab-icon">🏍️</span>
+  <div class="segments" role="tablist">
+    <button class="segment active" data-panel="bikes" role="tab" aria-selected="true">
+      <svg class="seg-icon" viewBox="0 0 24 24"><path d="M19 7c-.79 0-1.55.21-2.2.58l-2.04-2.04A2.99 2.99 0 0012.6 4.5h-.59c-1.66 0-3 1.34-3 3v.5h2V7.5c0-.55.45-1 1-1h.59c.27 0 .52.11.71.29l1.46 1.46-1.94 1.94H8.5c-.83 0-1.5.67-1.5 1.5v2H5.5C4.12 13.69 3 14.81 3 16.19s1.12 2.5 2.5 2.5 2.5-1.12 2.5-2.5c0-.21-.03-.41-.07-.61L9.85 14h2.81l1.96-1.96.66.66-.74.74A4.97 4.97 0 0014 17a5 5 0 0010 0 5 5 0 00-5-5zM5.5 17.5a1 1 0 010-2 1 1 0 010 2zM19 19a3 3 0 010-6 3 3 0 010 6z"/></svg>
       Bikes
     </button>
+    <button class="segment" data-panel="cars" role="tab" aria-selected="false">
+      <svg class="seg-icon" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8a1 1 0 001 1h1a1 1 0 001-1v-1h12v1a1 1 0 001 1h1a1 1 0 001-1v-8l-2.08-5.99zM6.5 16a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm11 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+      Cars
+    </button>
+    <button class="segment" data-panel="trucks" role="tab" aria-selected="false">
+      <svg class="seg-icon" viewBox="0 0 24 24"><path d="M20 8h-3V4H3a2 2 0 00-2 2v11h2a3 3 0 003 3 3 3 0 003-3h6a3 3 0 003 3 3 3 0 003-3h2v-5l-3-4zM6 18.5A1.5 1.5 0 014.5 17 1.5 1.5 0 016 15.5 1.5 1.5 0 017.5 17 1.5 1.5 0 016 18.5zm12 0a1.5 1.5 0 01-1.5-1.5 1.5 1.5 0 011.5-1.5 1.5 1.5 0 011.5 1.5 1.5 1.5 0 01-1.5 1.5zm-1-5.5V9.5h2.5l1.96 3.5H17z"/></svg>
+      Trucks
+    </button>
   </div>
 
-  <!-- CARS PANEL -->
-  <div class="panel active" id="panel-cars" role="tabpanel">
+  <!-- CARS -->
+  <div class="panel" id="panel-cars" role="tabpanel">
     <div class="menu-card">
       <div class="menu-header">
-        <h3>CAR SERVICES</h3>
-        <p>Flat rates — parts &amp; fluids by customer</p>
-        <p class="effective-year">Effective <span class="year-tag">2026</span></p>
+        <h3>Car Services</h3>
+        <p class="menu-subtitle">Flat rates · parts &amp; fluids by customer</p>
+        <div class="effective-pill">Effective <span class="year-tag">2026</span></div>
       </div>
       <ul class="menu-list">
         <li class="menu-row">
-          <div class="menu-label">
-            Diagnosis
-            <span class="note"><span data-base="55">$55</span> up front · deducted from any job of <span data-base="220">$220</span> or more</span>
-          </div>
+          <div class="menu-label">Diagnosis<span class="note"><span data-base="55">$55</span> up front · deducted from any job of <span data-base="220">$220</span> or more</span></div>
           <div class="menu-price"><span data-base="55">$55</span></div>
         </li>
         <li class="menu-row">
@@ -1688,10 +1810,7 @@ footer .foot-logo .o { color: var(--chrome); }
           <div class="menu-price"><span data-base="66">$66</span></div>
         </li>
         <li class="menu-row">
-          <div class="menu-label">
-            Disc Brakes
-            <span class="note">pads only</span>
-          </div>
+          <div class="menu-label">Disc Brakes<span class="note">Pads only</span></div>
           <div class="menu-price"><span data-base="110">$110</span></div>
         </li>
         <li class="menu-row">
@@ -1707,10 +1826,7 @@ footer .foot-logo .o { color: var(--chrome); }
           <div class="menu-price"><span data-base="187">$187</span></div>
         </li>
         <li class="menu-row">
-          <div class="menu-label">
-            Rear Drum Brakes
-            <span class="note">shoes only</span>
-          </div>
+          <div class="menu-label">Rear Drum Brakes<span class="note">Shoes only</span></div>
           <div class="menu-price"><span data-base="110">$110</span></div>
         </li>
         <li class="menu-row">
@@ -1722,199 +1838,79 @@ footer .foot-logo .o { color: var(--chrome); }
           <div class="menu-price"><span data-base="82.50">$82.50</span></div>
         </li>
         <li class="menu-row">
-          <div class="menu-label">
-            Spark Plugs
-            <span class="note">plugs only / plugs &amp; wires</span>
-          </div>
-          <div class="menu-price dual">
-            <span><span data-base="110">$110</span></span>
-            <span class="sub"><span data-base="176">$176</span> w/ wires</span>
-          </div>
+          <div class="menu-label">Spark Plugs<span class="note">Plugs only / Plugs &amp; wires</span></div>
+          <div class="menu-price dual"><span><span data-base="110">$110</span></span><span class="sub"><span data-base="176">$176</span> w/ wires</span></div>
         </li>
         <li class="menu-row">
-          <div class="menu-label">
-            Basic Tune-up
-            <span class="note">oil &amp; filter · plugs &amp; wires · air filter check/replace · belt inspection</span>
-          </div>
+          <div class="menu-label">Basic Tune-up<span class="note">Oil &amp; filter · plugs &amp; wires · air filter check/replace · belt inspection</span></div>
           <div class="menu-price"><span data-base="275">$275</span></div>
         </li>
       </ul>
-      <div class="menu-fineprint">
-        <strong>Parts and Fluids provided by customer.</strong><br>
-        <strong>4.9% if paying with an app</strong><br>
-        <span style="color:var(--chrome-mid);font-style:italic;">Flat rates available.</span><span class="adjust-note">Prices adjust 10% annually on Jan 1</span>
+      <div class="menu-foot">
+        <strong>Parts &amp; fluids provided by customer · 4.9% if paying with an app</strong>
+        Flat rates available
+        <span class="adjust-line">Prices adjust 10% annually on Jan 1</span>
       </div>
     </div>
   </div>
 
-  <!-- TRUCKS PANEL (same pricing as cars) -->
+  <!-- TRUCKS -->
   <div class="panel" id="panel-trucks" role="tabpanel">
     <div class="menu-card">
       <div class="menu-header">
-        <h3>TRUCK SERVICES</h3>
-        <p>Same flat rates as cars — parts &amp; fluids by customer</p>
-        <p class="effective-year">Effective <span class="year-tag">2026</span></p>
+        <h3>Truck Services</h3>
+        <p class="menu-subtitle">Same flat rates as cars · parts &amp; fluids by customer</p>
+        <div class="effective-pill">Effective <span class="year-tag">2026</span></div>
       </div>
       <ul class="menu-list">
         <li class="menu-row">
-          <div class="menu-label">
-            Diagnosis
-            <span class="note"><span data-base="55">$55</span> up front · deducted from any job of <span data-base="220">$220</span> or more</span>
-          </div>
+          <div class="menu-label">Diagnosis<span class="note"><span data-base="55">$55</span> up front · deducted from any job of <span data-base="220">$220</span> or more</span></div>
           <div class="menu-price"><span data-base="55">$55</span></div>
         </li>
-        <li class="menu-row">
-          <div class="menu-label">Oil Change</div>
-          <div class="menu-price"><span data-base="66">$66</span></div>
-        </li>
-        <li class="menu-row">
-          <div class="menu-label">
-            Disc Brakes
-            <span class="note">pads only</span>
-          </div>
-          <div class="menu-price"><span data-base="110">$110</span></div>
-        </li>
-        <li class="menu-row">
-          <div class="menu-label">Hourly Rate</div>
-          <div class="menu-price"><span data-base="71.50">$71.50</span></div>
-        </li>
-        <li class="menu-row">
-          <div class="menu-label">Full Front Brakes</div>
-          <div class="menu-price"><span data-base="187">$187</span></div>
-        </li>
-        <li class="menu-row">
-          <div class="menu-label">Full Back Brakes</div>
-          <div class="menu-price"><span data-base="187">$187</span></div>
-        </li>
-        <li class="menu-row">
-          <div class="menu-label">
-            Rear Drum Brakes
-            <span class="note">shoes only</span>
-          </div>
-          <div class="menu-price"><span data-base="110">$110</span></div>
-        </li>
-        <li class="menu-row">
-          <div class="menu-label">Full Drum Brakes</div>
-          <div class="menu-price"><span data-base="220">$220</span></div>
-        </li>
-        <li class="menu-row">
-          <div class="menu-label">Brake Bleeding</div>
-          <div class="menu-price"><span data-base="82.50">$82.50</span></div>
-        </li>
-        <li class="menu-row">
-          <div class="menu-label">
-            Spark Plugs
-            <span class="note">plugs only / plugs &amp; wires</span>
-          </div>
-          <div class="menu-price dual">
-            <span><span data-base="110">$110</span></span>
-            <span class="sub"><span data-base="176">$176</span> w/ wires</span>
-          </div>
-        </li>
-        <li class="menu-row">
-          <div class="menu-label">
-            Basic Tune-up
-            <span class="note">oil &amp; filter · plugs &amp; wires · air filter check/replace · belt inspection</span>
-          </div>
-          <div class="menu-price"><span data-base="275">$275</span></div>
-        </li>
+        <li class="menu-row"><div class="menu-label">Oil Change</div><div class="menu-price"><span data-base="66">$66</span></div></li>
+        <li class="menu-row"><div class="menu-label">Disc Brakes<span class="note">Pads only</span></div><div class="menu-price"><span data-base="110">$110</span></div></li>
+        <li class="menu-row"><div class="menu-label">Hourly Rate</div><div class="menu-price"><span data-base="71.50">$71.50</span></div></li>
+        <li class="menu-row"><div class="menu-label">Full Front Brakes</div><div class="menu-price"><span data-base="187">$187</span></div></li>
+        <li class="menu-row"><div class="menu-label">Full Back Brakes</div><div class="menu-price"><span data-base="187">$187</span></div></li>
+        <li class="menu-row"><div class="menu-label">Rear Drum Brakes<span class="note">Shoes only</span></div><div class="menu-price"><span data-base="110">$110</span></div></li>
+        <li class="menu-row"><div class="menu-label">Full Drum Brakes</div><div class="menu-price"><span data-base="220">$220</span></div></li>
+        <li class="menu-row"><div class="menu-label">Brake Bleeding</div><div class="menu-price"><span data-base="82.50">$82.50</span></div></li>
+        <li class="menu-row"><div class="menu-label">Spark Plugs<span class="note">Plugs only / Plugs &amp; wires</span></div><div class="menu-price dual"><span><span data-base="110">$110</span></span><span class="sub"><span data-base="176">$176</span> w/ wires</span></div></li>
+        <li class="menu-row"><div class="menu-label">Basic Tune-up<span class="note">Oil &amp; filter · plugs &amp; wires · air filter check/replace · belt inspection</span></div><div class="menu-price"><span data-base="275">$275</span></div></li>
       </ul>
-      <div class="menu-fineprint">
-        <strong>Parts and Fluids provided by customer.</strong><br>
-        <strong>4.9% if paying with an app</strong><br>
-        <span style="color:var(--chrome-mid);font-style:italic;">Flat rates available.</span><span class="adjust-note">Prices adjust 10% annually on Jan 1</span>
+      <div class="menu-foot">
+        <strong>Parts &amp; fluids provided by customer · 4.9% if paying with an app</strong>
+        Flat rates available
+        <span class="adjust-line">Prices adjust 10% annually on Jan 1</span>
       </div>
     </div>
   </div>
 
-  <!-- BIKES PANEL -->
-  <div class="panel" id="panel-bikes" role="tabpanel">
+  <!-- BIKES -->
+  <div class="panel active" id="panel-bikes" role="tabpanel">
     <div class="menu-card">
       <div class="menu-header">
-        <h3>MOTORCYCLE SERVICES</h3>
-        <p>Bikers serving bikers — we ride too</p>
-        <p class="effective-year">Effective <span class="year-tag">2026</span></p>
+        <h3>Motorcycle Services</h3>
+        <p class="menu-subtitle">Bikers serving bikers — we ride too</p>
+        <div class="effective-pill">Effective <span class="year-tag">2026</span></div>
       </div>
       <ul class="menu-list">
-        <li class="menu-row">
-          <div class="menu-label">
-            Pick Up
-            <span class="note">motorcycles only · within 5 mi · <span data-base="3.30">$3.30</span> each additional mile</span>
-          </div>
-          <div class="menu-price"><span data-base="55">$55</span></div>
-        </li>
-        <li class="menu-row">
-          <div class="menu-label">
-            Diagnosis
-            <span class="note"><span data-base="55">$55</span> up front · deducted from any job of <span data-base="220">$220</span> or more</span>
-          </div>
-          <div class="menu-price"><span data-base="55">$55</span></div>
-        </li>
-        <li class="menu-row">
-          <div class="menu-label">
-            Hourly Rate
-            <span class="note">for all aftermarket parts installed</span>
-          </div>
-          <div class="menu-price"><span data-base="60.50">$60.50</span></div>
-        </li>
-        <li class="menu-row">
-          <div class="menu-label">Tire Change</div>
-          <div class="menu-price"><span data-base="60.50">$60.50</span></div>
-        </li>
-        <li class="menu-row">
-          <div class="menu-label">Oil Change</div>
-          <div class="menu-price"><span data-base="66">$66</span></div>
-        </li>
-        <li class="menu-row">
-          <div class="menu-label">
-            Brakes
-            <span class="note">front / rear</span>
-          </div>
-          <div class="menu-price dual">
-            <span><span data-base="55">$55</span> <span style="font-size:12px;color:var(--chrome-mid);font-family:var(--font-menu);">front</span></span>
-            <span class="sub"><span data-base="44">$44</span> rear</span>
-          </div>
-        </li>
-        <li class="menu-row">
-          <div class="menu-label">Carb Cleaning</div>
-          <div class="menu-price"><span data-base="82.50">$82.50</span></div>
-        </li>
-        <li class="menu-row">
-          <div class="menu-label">
-            Lite Tune-up
-            <span class="note">general inspection — fluids, wires, chain, bolts, tire pressure + oil &amp; filter change</span>
-          </div>
-          <div class="menu-price"><span data-base="104.50">$104.50</span></div>
-        </li>
-        <li class="menu-row">
-          <div class="menu-label">
-            Full Tune-up
-            <span class="note">lite + plugs &amp; wires, throttle/brake cable check, brake bleed, air filter, chain clean &amp; lube</span>
-          </div>
-          <div class="menu-price"><span data-base="275">$275</span></div>
-        </li>
-        <li class="menu-row">
-          <div class="menu-label">
-            Winterizing
-            <span class="note">pick-up, winterizing treatment, drop-off</span>
-          </div>
-          <div class="menu-price"><span data-base="165">$165</span></div>
-        </li>
-        <li class="menu-row">
-          <div class="menu-label">
-            Winterizing &amp; Storage
-            <span class="note">pick-up + treatment + first month of storage</span>
-          </div>
-          <div class="menu-price dual">
-            <span><span data-base="165">$165</span></span>
-            <span class="sub"><span data-base="82.50">$82.50</span>/mo after</span>
-          </div>
-        </li>
+        <li class="menu-row"><div class="menu-label">Pick Up<span class="note">Motorcycles only · within 5 mi · <span data-base="3.30">$3.30</span> each additional mile</span></div><div class="menu-price"><span data-base="55">$55</span></div></li>
+        <li class="menu-row"><div class="menu-label">Diagnosis<span class="note"><span data-base="55">$55</span> up front · deducted from any job of <span data-base="220">$220</span> or more</span></div><div class="menu-price"><span data-base="55">$55</span></div></li>
+        <li class="menu-row"><div class="menu-label">Hourly Rate<span class="note">For all aftermarket parts installed</span></div><div class="menu-price"><span data-base="60.50">$60.50</span></div></li>
+        <li class="menu-row"><div class="menu-label">Tire Change</div><div class="menu-price"><span data-base="60.50">$60.50</span></div></li>
+        <li class="menu-row"><div class="menu-label">Oil Change</div><div class="menu-price"><span data-base="66">$66</span></div></li>
+        <li class="menu-row"><div class="menu-label">Brakes<span class="note">Front / Rear</span></div><div class="menu-price dual"><span><span data-base="55">$55</span> front</span><span class="sub"><span data-base="44">$44</span> rear</span></div></li>
+        <li class="menu-row"><div class="menu-label">Carb Cleaning</div><div class="menu-price"><span data-base="82.50">$82.50</span></div></li>
+        <li class="menu-row"><div class="menu-label">Lite Tune-up<span class="note">General inspection — fluids, wires, chain, bolts, tire pressure + oil &amp; filter change</span></div><div class="menu-price"><span data-base="104.50">$104.50</span></div></li>
+        <li class="menu-row"><div class="menu-label">Full Tune-up<span class="note">Lite + plugs &amp; wires, throttle/brake cable check, brake bleed, air filter, chain clean &amp; lube</span></div><div class="menu-price"><span data-base="275">$275</span></div></li>
+        <li class="menu-row"><div class="menu-label">Winterizing<span class="note">Pick-up, winterizing treatment, drop-off</span></div><div class="menu-price"><span data-base="165">$165</span></div></li>
+        <li class="menu-row"><div class="menu-label">Winterizing &amp; Storage<span class="note">Pick-up + treatment + first month of storage</span></div><div class="menu-price dual"><span><span data-base="165">$165</span></span><span class="sub"><span data-base="82.50">$82.50</span>/mo after</span></div></li>
       </ul>
-      <div class="menu-fineprint">
-        <strong>Parts and Fluids provided by customer.</strong><br>
-        <strong>4.9% if paying with an app</strong><br>
-        <span style="color:var(--chrome-mid);font-style:italic;">Flat rates available.</span><span class="adjust-note">Prices adjust 10% annually on Jan 1</span>
+      <div class="menu-foot">
+        <strong>Parts &amp; fluids provided by customer · 4.9% if paying with an app</strong>
+        Flat rates available
+        <span class="adjust-line">Prices adjust 10% annually on Jan 1</span>
       </div>
     </div>
   </div>
@@ -1924,10 +1920,9 @@ footer .foot-logo .o { color: var(--chrome); }
      HOW IT WORKS
 ================================================================ -->
 <section class="section">
-  <p class="section-kicker">Simple · Fast · Fair</p>
-  <h2 class="section-title">HOW IT <span class="accent">WORKS</span></h2>
-  <div class="section-divider">
-    <span class="section-divider-dot"></span>
+  <div class="section-head">
+    <div class="section-eyebrow">Simple · Fast · Fair</div>
+    <h2 class="section-title">How it <span class="accent">works.</span></h2>
   </div>
 
   <div class="how-grid">
@@ -1949,7 +1944,7 @@ footer .foot-logo .o { color: var(--chrome); }
       <div class="how-num">3</div>
       <div class="how-body">
         <h4>Pay &amp; Ride</h4>
-        <p>Tap Pay Now on Cash App, or settle in cash. Parts and fluids supplied by customer — flat rates on every listed service.</p>
+        <p>Tap Pay Now on Cash App, or settle in cash. Parts &amp; fluids supplied by customer — flat rates on every listed service.</p>
       </div>
     </div>
   </div>
@@ -1959,40 +1954,865 @@ footer .foot-logo .o { color: var(--chrome); }
      CONTACT
 ================================================================ -->
 <section class="section">
-  <p class="section-kicker">Direct Line</p>
-  <h2 class="section-title">GET IN <span class="accent">TOUCH</span></h2>
-  <div class="section-divider">
-    <span class="section-divider-dot"></span>
+  <div class="section-head">
+    <div class="section-eyebrow">Direct Line</div>
+    <h2 class="section-title">Get in <span class="accent">touch.</span></h2>
   </div>
 
   <div class="contact-card">
     <a class="contact-row" href="tel:+15706148445">
-      <div class="contact-icon">
+      <div class="contact-icon phone">
         <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.58l2.2-2.21a.96.96 0 00.25-1c-.38-1.12-.58-2.32-.58-3.57a1 1 0 00-1-1H4a1 1 0 00-1 1c0 9.39 7.61 17 17 17a1 1 0 001-1v-3.5a1 1 0 00-1-1z"/></svg>
       </div>
       <div class="contact-meta">
-        <div class="label">Call / Text</div>
+        <div class="label">Call &amp; Text</div>
         <div class="value">(570) 614-8445</div>
       </div>
+      <svg class="contact-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
     <a class="contact-row" href="mailto:joetriple888@yahoo.com">
-      <div class="contact-icon">
+      <div class="contact-icon email">
         <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
       </div>
       <div class="contact-meta">
         <div class="label">Email</div>
         <div class="value">joetriple888@yahoo.com</div>
       </div>
+      <svg class="contact-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
     <a class="contact-row" href="https://cash.app/$Triple888mech" target="_blank" rel="noopener">
-      <div class="contact-icon">
+      <div class="contact-icon cash">
         <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.5 14.5v1h-3v-1h-1.25a.75.75 0 010-1.5h4.5a.75.75 0 000-1.5h-3a2.25 2.25 0 010-4.5h.25V8h3v1h1.25a.75.75 0 010 1.5h-4.5a.75.75 0 000 1.5h3a2.25 2.25 0 010 4.5h-.25z"/></svg>
       </div>
       <div class="contact-meta">
         <div class="label">Pay via Cash App</div>
         <div class="value">$Triple888mech</div>
       </div>
+      <svg class="contact-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
+  </div>
+</section>
+
+<!-- ================================================================
+     MAINTENANCE TIPS
+================================================================ -->
+<section class="section" id="tips">
+  <div class="section-head">
+    <div class="section-eyebrow">Owner's Manual</div>
+    <h2 class="section-title">Maintenance <span class="accent">tips.</span></h2>
+  </div>
+
+  <div class="tips-intro">
+    <div class="tips-intro-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+    </div>
+    <p>Routine maintenance is the cheapest insurance you'll ever buy. Skip it and small problems become engine-killers, transmission-killers, or worse — wreck-causers. <strong>Every interval below is a guideline; check your owner's manual for your specific make and model.</strong> When in doubt, text us.</p>
+  </div>
+
+  <div class="segments tips-segments" role="tablist">
+    <button class="segment active" data-tip-panel="bikes" role="tab" aria-selected="true">
+      <svg class="seg-icon" viewBox="0 0 24 24"><path d="M19 7c-.79 0-1.55.21-2.2.58l-2.04-2.04A2.99 2.99 0 0012.6 4.5h-.59c-1.66 0-3 1.34-3 3v.5h2V7.5c0-.55.45-1 1-1h.59c.27 0 .52.11.71.29l1.46 1.46-1.94 1.94H8.5c-.83 0-1.5.67-1.5 1.5v2H5.5C4.12 13.69 3 14.81 3 16.19s1.12 2.5 2.5 2.5 2.5-1.12 2.5-2.5c0-.21-.03-.41-.07-.61L9.85 14h2.81l1.96-1.96.66.66-.74.74A4.97 4.97 0 0014 17a5 5 0 0010 0 5 5 0 00-5-5zM5.5 17.5a1 1 0 010-2 1 1 0 010 2zM19 19a3 3 0 010-6 3 3 0 010 6z"/></svg>
+      Bikes
+    </button>
+    <button class="segment" data-tip-panel="cars" role="tab" aria-selected="false">
+      <svg class="seg-icon" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8a1 1 0 001 1h1a1 1 0 001-1v-1h12v1a1 1 0 001 1h1a1 1 0 001-1v-8l-2.08-5.99zM6.5 16a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm11 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+      Cars
+    </button>
+    <button class="segment" data-tip-panel="trucks" role="tab" aria-selected="false">
+      <svg class="seg-icon" viewBox="0 0 24 24"><path d="M20 8h-3V4H3a2 2 0 00-2 2v11h2a3 3 0 003 3 3 3 0 003-3h6a3 3 0 003 3 3 3 0 003-3h2v-5l-3-4zM6 18.5A1.5 1.5 0 014.5 17 1.5 1.5 0 016 15.5 1.5 1.5 0 017.5 17 1.5 1.5 0 016 18.5zm12 0a1.5 1.5 0 01-1.5-1.5 1.5 1.5 0 011.5-1.5 1.5 1.5 0 011.5 1.5 1.5 1.5 0 01-1.5 1.5zm-1-5.5V9.5h2.5l1.96 3.5H17z"/></svg>
+      Trucks
+    </button>
+  </div>
+
+  <!-- ============== BIKES TIPS ============== -->
+  <div class="panel active" id="tip-panel-bikes" role="tabpanel">
+    <div class="tips-card">
+      <div class="tips-card-head">
+        <h3>Motorcycle Maintenance</h3>
+        <p>Bikes punish neglect harder than any other vehicle — you're the airbag.</p>
+      </div>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon critical" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Tire Pressure &amp; Tread <span class="tip-interval">Every Ride</span></div>
+            <div class="tip-sub">Critical · safety</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">Why it matters</div>
+            <p>A motorcycle has roughly the contact patch of a credit card on each tire. That's all that's keeping you off the asphalt. Pressure and tread directly determine grip, braking distance, cornering stability, and tire life.</p>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">What to check</div>
+            <ul>
+              <li>Cold pressure (before riding) — match the spec sticker on the swingarm or frame, not the max on the tire sidewall</li>
+              <li>Tread depth — minimum 2/32" (1.6mm), but replace at 3/32" for safe wet performance</li>
+              <li>Cracks, dry rot, embedded objects, uneven wear (cupping or center wear = pressure problems)</li>
+              <li>Date code on the sidewall — replace tires older than 5–6 years even with tread left</li>
+            </ul>
+          </div>
+          <div class="tip-section danger">
+            <div class="tip-section-label"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What happens if you don't</div>
+            <p>Underinflated tires overheat at speed, leading to blowouts. Bald tires lose grip first in the rain — the dangerous moment is the second a corner gets damp. A blown rear tire at highway speed is one of the most common single-vehicle motorcycle fatalities.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon high" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h14v2H5zM5 18h14v2H5zM7 8h10v8H7z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Chain Tension, Cleaning &amp; Lube <span class="tip-interval">Every 500 mi</span></div>
+            <div class="tip-sub">High priority · drivetrain</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">Why it matters</div>
+            <p>The chain transmits all your engine's power to the rear wheel. A dry, dirty, or improperly tensioned chain wears at 5–10× the normal rate, takes the sprockets with it, and can snap under load.</p>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">What to do</div>
+            <ul>
+              <li>Clean every 500 miles or after riding in rain — kerosene or dedicated chain cleaner with a soft brush</li>
+              <li>Lube while warm after cleaning — chain wax or O-ring-safe lube on the inside of the lower run</li>
+              <li>Check tension at the tightest point of the chain's rotation; should have ~1–1.5" of vertical play (check your manual)</li>
+              <li>Inspect for kinked, frozen, or rusty links — replace the chain AND both sprockets together</li>
+            </ul>
+          </div>
+          <div class="tip-section danger">
+            <div class="tip-section-label"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What happens if you don't</div>
+            <p>A snapped chain at speed can lock the rear wheel (instant skid) or whip into the engine case, the swingarm, or your leg. Worn sprocket teeth become hooked and skip under throttle. Replacement chain + sprockets = $200–500 in parts; a chain failure can total the bike or worse.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon high" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 003 9.5c0 4.5 6.5 11 6.5 11s6.5-6.5 6.5-11A6.5 6.5 0 009.5 3zm0 9a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Engine Oil &amp; Filter <span class="tip-interval">3–5K mi</span></div>
+            <div class="tip-sub">High priority · engine life</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">Why it matters</div>
+            <p>Bike engines spin faster and hotter than car engines and most share oil with the transmission and wet clutch. The oil shears, breaks down, and picks up clutch friction material faster — meaning shorter intervals than a car.</p>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">What to do</div>
+            <ul>
+              <li>Change every 3,000–5,000 miles, or once a season for low-mileage bikes (oil oxidizes whether you ride or not)</li>
+              <li>Use the exact JASO MA/MA2 spec your manual calls for — car oils with friction modifiers will glaze your wet clutch</li>
+              <li>Always replace the filter at the same time</li>
+              <li>Check oil level on the centerstand or with the bike held perfectly upright — sidestand readings will lie to you</li>
+            </ul>
+          </div>
+          <div class="tip-section danger">
+            <div class="tip-section-label"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What happens if you don't</div>
+            <p>Old oil sludges up oil passages, starves the top-end of lubrication, and accelerates camshaft and valve-train wear. Cooked oil = scored cylinders, spun bearings, and a bottom-end rebuild that costs more than the bike. Glazed clutch from wrong oil = clutch replacement + transmission inspection.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon critical" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Brake Pads, Rotors &amp; Fluid <span class="tip-interval">Every 5K mi</span></div>
+            <div class="tip-sub">Critical · stopping</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">Why it matters</div>
+            <p>Front brakes do roughly 70% of your stopping. Pad thickness, rotor wear, and fluid condition all directly determine whether you stop short of an obstacle or not.</p>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">What to check</div>
+            <ul>
+              <li>Pads — replace at 2mm of friction material remaining (most have a wear indicator groove)</li>
+              <li>Rotors — measure thickness vs. minimum stamped on the rotor; warped rotors cause pulsing under braking</li>
+              <li>Brake fluid — flush every 2 years; DOT 4 absorbs water from air, lowering boiling point and causing fade</li>
+              <li>Lever feel — spongy = air or moisture in lines; firm but doesn't return = sticky caliper</li>
+            </ul>
+          </div>
+          <div class="tip-section danger">
+            <div class="tip-section-label"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What happens if you don't</div>
+            <p>Worn pads damage rotors. Boiled fluid causes brake fade — exactly when you need brakes most (long descent, hard stop). Stuck calipers can lock a wheel without warning. Brake failure on a bike is almost always a "highside or curb" decision.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon medium" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Air Filter <span class="tip-interval">10–15K mi</span></div>
+            <div class="tip-sub">Medium priority · performance</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">Why it matters</div>
+            <p>The engine is an air pump. A clogged filter chokes it — costing you power, fuel economy, and throttle response. Worse, a torn or improperly seated filter lets unfiltered air carry grit straight into the cylinders.</p>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">What to do</div>
+            <ul>
+              <li>Inspect every oil change; replace at 10,000–15,000 miles (sooner if you ride dusty roads or off-road)</li>
+              <li>Foam filters — clean and re-oil with proper foam-filter oil; never use motor oil</li>
+              <li>Paper filters — replace; do not try to clean</li>
+              <li>K&amp;N-style oiled cotton filters — clean and re-oil per kit instructions</li>
+            </ul>
+          </div>
+          <div class="tip-section danger">
+            <div class="tip-section-label"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What happens if you don't</div>
+            <p>Clogged filter = rich running, fouled plugs, lower MPG, sluggish throttle. Failed filter = silica dust scoring cylinder walls, ruined rings, and a top-end rebuild. Over-oiled aftermarket filters can foul the MAF sensor on EFI bikes.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon medium" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Spark Plugs <span class="tip-interval">8–10K mi</span></div>
+            <div class="tip-sub">Medium priority · ignition</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">Why it matters</div>
+            <p>Plugs ignite the air-fuel mixture thousands of times per minute. As they wear, the spark gets weaker, ignition timing effectively retards, and the engine misfires — burning fuel inefficiently and dumping it into the exhaust.</p>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">What to check</div>
+            <ul>
+              <li>Replace per the manual — usually 8,000–10,000 miles for standard, longer for iridium</li>
+              <li>Inspect the electrode color: tan/light brown = healthy; black sooty = rich; white/blistered = lean or wrong heat range</li>
+              <li>Always use the exact heat range in your manual — wrong plug can pre-ignite or foul</li>
+              <li>Torque properly — over-tight strips threads, loose plugs blow out and destroy the head</li>
+            </ul>
+          </div>
+          <div class="tip-section danger">
+            <div class="tip-section-label"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What happens if you don't</div>
+            <p>Misfires dump raw fuel into the exhaust, damaging the catalytic converter. Hard starts, surging at idle, sluggish acceleration. Worst case: detonation (pre-ignition knocking) cracks pistons and ringlands.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon high" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Battery &amp; Charging System <span class="tip-interval">Monthly Check</span></div>
+            <div class="tip-sub">High priority · electrical</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">Why it matters</div>
+            <p>Bike batteries are small (8–18Ah) and live in a brutal vibration and heat environment. They die fast if neglected, and a weak battery overworks the charging system into early failure.</p>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">What to do</div>
+            <ul>
+              <li>Tender it during storage — a Battery Tender or smart charger keeps the battery healthy through any non-riding period</li>
+              <li>Check resting voltage monthly: 12.7V+ = healthy, 12.4V = 50% charged, &lt;12.0V = sulfated</li>
+              <li>Charging voltage at 3,000 RPM should be 13.8–14.5V — outside that range, the regulator/rectifier is suspect</li>
+              <li>Clean terminals; check for corrosion under the bike's plastic; tighten ground straps</li>
+            </ul>
+          </div>
+          <div class="tip-section danger">
+            <div class="tip-section-label"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What happens if you don't</div>
+            <p>Dead battery in a parking lot is the cheap version. The expensive one: a failing reg/rec overcharges the battery, boils it, and can cook the stator (alternator) — that's a $400–$800 repair on most bikes. Dead battery while riding can cut the ignition mid-corner on some models.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon medium" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Coolant (liquid-cooled) <span class="tip-interval">Every 2 yrs</span></div>
+            <div class="tip-sub">Medium priority · cooling</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">Why it matters</div>
+            <p>Coolant breaks down chemically over time. Old coolant becomes acidic, eats water-pump seals, corrodes aluminum cooling passages, and loses its anti-boil/anti-freeze properties.</p>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">What to do</div>
+            <ul>
+              <li>Flush and replace every 2 years or 24,000 miles, whichever comes first</li>
+              <li>Use the exact spec coolant in your manual — most bikes need silicate-free, phosphate-free formula</li>
+              <li>Check level cold; pressure-test the radiator cap if it's older than 5 years</li>
+              <li>Inspect hoses for swelling, cracking, or weeping — replace at the first sign</li>
+            </ul>
+          </div>
+          <div class="tip-section danger">
+            <div class="tip-section-label"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What happens if you don't</div>
+            <p>Overheating warps the cylinder head, blows head gaskets, and seizes pistons. A blown coolant hose at speed can dump fluid on the rear tire — instant lowside. Acidic old coolant slowly destroys the water pump from the inside.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon low" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Cables, Levers &amp; Pivot Points <span class="tip-interval">Every 2K mi</span></div>
+            <div class="tip-sub">Routine · feel &amp; response</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">Why it matters</div>
+            <p>Throttle, clutch, and brake cables stretch, fray, and seize from corrosion. A snapped or stuck cable mid-ride is dangerous; a sticky throttle is a worst-case scenario.</p>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">What to do</div>
+            <ul>
+              <li>Lube cables with cable-specific lube every 2,000 miles — never with chain wax (gums up)</li>
+              <li>Inspect for fraying at the cable ends — replace immediately if you see broken strands</li>
+              <li>Adjust free play per manual: throttle 2–4mm, clutch 10–20mm at the lever</li>
+              <li>Lube lever pivots, brake pedal pivot, sidestand, and footpegs with light grease</li>
+            </ul>
+          </div>
+          <div class="tip-section danger">
+            <div class="tip-section-label"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What happens if you don't</div>
+            <p>Stuck-open throttle = high-speed runaway. Snapped clutch cable = stuck in gear in traffic. Frozen brake pivot = brakes don't release after you let off, dragging and overheating the rotor until pads glaze or fluid boils.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon routine" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l-1.91 5.86H4l4.82 3.5L7 18.27 12 14.77l5 3.5-1.82-5.91L20 8.86h-6.09z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Pre-Ride Checklist (T-CLOCS) <span class="tip-interval">Every Ride</span></div>
+            <div class="tip-sub">Routine · 60-second walkaround</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">The MSF acronym</div>
+            <ul>
+              <li><strong>T — Tires &amp; Wheels:</strong> pressure, tread, no embedded objects, no loose spokes, axle nuts tight</li>
+              <li><strong>C — Controls:</strong> levers, pedals, cables, hoses, throttle snap-back, switches all working</li>
+              <li><strong>L — Lights &amp; Electrics:</strong> headlight (low &amp; high beam), brake light (front and rear lever), turn signals, horn</li>
+              <li><strong>O — Oil &amp; Fluids:</strong> engine oil level, coolant level, brake fluid, no leaks under the bike</li>
+              <li><strong>C — Chassis:</strong> frame, suspension free of damage, chain/belt tension and lube, fasteners tight</li>
+              <li><strong>S — Stands:</strong> sidestand and centerstand return properly, springs strong</li>
+            </ul>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">Why it matters</div>
+            <p>Sixty seconds before each ride catches 90% of mechanical issues before they become roadside problems — or worse. This is what every track day requires; treat your street rides the same.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ============== CARS TIPS ============== -->
+  <div class="panel" id="tip-panel-cars" role="tabpanel">
+    <div class="tips-card">
+      <div class="tips-card-head">
+        <h3>Car Maintenance</h3>
+        <p>The vehicle that runs forever is the one whose owner reads the manual.</p>
+      </div>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon high" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 003 9.5c0 4.5 6.5 11 6.5 11s6.5-6.5 6.5-11A6.5 6.5 0 009.5 3zm0 9a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Engine Oil &amp; Filter <span class="tip-interval">5–7.5K mi</span></div>
+            <div class="tip-sub">High priority · engine life</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">Why it matters</div>
+            <p>Engine oil lubricates, cools, cleans, and seals. As it breaks down, it loses viscosity, picks up combustion byproducts (acid, soot, fuel), and stops protecting the metal-on-metal surfaces it's sitting between.</p>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">What to do</div>
+            <ul>
+              <li>Conventional: every 3,000–5,000 miles. Synthetic blend: 5,000–7,500. Full synthetic: up to 10,000 (check manual)</li>
+              <li>Always replace the filter at the same time</li>
+              <li>Use the exact viscosity in your manual (e.g., 0W-20, 5W-30) — wrong oil costs MPG and wear</li>
+              <li>Check the level monthly between changes; top off if it drops more than half a quart low</li>
+            </ul>
+          </div>
+          <div class="tip-section danger">
+            <div class="tip-section-label"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What happens if you don't</div>
+            <p>Sludge buildup blocks oil passages, starves the bearings, and turns a $60 oil change into an $8,000 engine replacement. Even one extra-long interval can wreck a turbo. Modern engines are tighter-toleranced and less forgiving than older ones.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon critical" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Brakes — Pads, Rotors, Fluid <span class="tip-interval">Inspect 10K mi</span></div>
+            <div class="tip-sub">Critical · stopping</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">Why it matters</div>
+            <p>Brakes are wear items that lose effectiveness gradually — you don't notice until they're dangerous. Pads, rotors, calipers, and brake fluid all degrade on different schedules.</p>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">What to check</div>
+            <ul>
+              <li>Pads — replace at 3mm; squealing, grinding, or pulling to one side means now</li>
+              <li>Rotors — pulsation through the pedal = warped; deep grooves = past minimum thickness, replace</li>
+              <li>Brake fluid — flush every 2 years; clear/light amber = good, dark brown = overdue</li>
+              <li>Pedal feel — sinking pedal = master cylinder failing; spongy = air or moisture in lines</li>
+              <li>ABS warning light — diagnose immediately; ABS keeps you straight in a panic stop</li>
+            </ul>
+          </div>
+          <div class="tip-section danger">
+            <div class="tip-section-label"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What happens if you don't</div>
+            <p>Worn pads scrape rotors down to the backing plate, then chew up the rotor — turning a $200 pad job into a $600 pad-and-rotor job. Boiled brake fluid causes total fade on long descents. Stuck calipers can ignite a wheel bearing or set fire to a pad. Worst case: total brake failure.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon high" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Tires — Pressure, Rotation, Alignment <span class="tip-interval">Monthly + 5K mi</span></div>
+            <div class="tip-sub">High priority · safety &amp; MPG</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">Why it matters</div>
+            <p>Tires are your only contact with the road. Underinflated, misaligned, or unrotated tires wear unevenly, lose grip in wet conditions, and reduce fuel economy by up to 3%.</p>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">What to do</div>
+            <ul>
+              <li>Pressure: check monthly (cold). Use the door-jamb sticker, NOT the max on the tire sidewall</li>
+              <li>Rotate every 5,000–7,500 miles to equalize wear (front-to-rear or X-pattern depending on drive type)</li>
+              <li>Alignment: get checked yearly or after hitting a major pothole/curb. Pulling, off-center steering wheel, or feathered tread = misaligned</li>
+              <li>Tread: replace at 4/32" for wet performance, never below 2/32"</li>
+              <li>Age: replace at 6 years regardless of tread (rubber dries out and cracks invisibly)</li>
+            </ul>
+          </div>
+          <div class="tip-section danger">
+            <div class="tip-section-label"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What happens if you don't</div>
+            <p>Underinflation overheats tires and causes blowouts at highway speed. Misalignment chews through a $600 set of tires in 15,000 miles. Worn tires lose grip first in the rain — most hydroplaning crashes happen on tires past 4/32".</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon medium" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Coolant Flush <span class="tip-interval">Every 30K–50K mi</span></div>
+            <div class="tip-sub">Medium priority · cooling</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">Why it matters</div>
+            <p>Coolant prevents freezing in winter, boil-over in summer, and corrosion year-round. The corrosion inhibitors deplete over time — once they're gone, coolant becomes acidic and starts eating your engine from the inside.</p>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">What to do</div>
+            <ul>
+              <li>Flush per manual — typically every 30,000–50,000 miles for OAT/HOAT, or 100,000 for extended-life formulas</li>
+              <li>Use the EXACT type your vehicle requires — green, orange, pink, gold, blue are all different chemistries; mixing causes gel</li>
+              <li>Inspect hoses for swelling, soft spots, cracks at the clamps</li>
+              <li>Pressure-test the cap and system if hoses are older than 7 years</li>
+            </ul>
+          </div>
+          <div class="tip-section danger">
+            <div class="tip-section-label"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What happens if you don't</div>
+            <p>Old coolant eats the water pump and heater core from the inside. A failed water pump while driving cooks the head gasket within minutes; that's a $1,500–$3,000 repair. Cracked head or warped block on most modern engines = total engine.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon high" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Transmission Fluid <span class="tip-interval">30–60K mi</span></div>
+            <div class="tip-sub">High priority · drivetrain</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">Why it matters</div>
+            <p>Automatic transmission fluid is hydraulic fluid, lubricant, and clutch coolant all in one. As it breaks down, it loses friction characteristics — clutches slip, then burn, then the transmission fails. CVTs and DCTs are even less tolerant of old fluid.</p>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">What to do</div>
+            <ul>
+              <li>Automatic: drain &amp; fill every 30,000–60,000 miles. "Lifetime fluid" is marketing — service it.</li>
+              <li>Manual: 60,000–90,000 miles with the exact spec gear oil from the manual</li>
+              <li>CVT: 30,000–60,000 miles religiously; CVT fluid is unique — never substitute</li>
+              <li>Healthy fluid is bright red and smells slightly sweet; brown or burnt-smelling fluid means damage is already happening</li>
+            </ul>
+          </div>
+          <div class="tip-section danger">
+            <div class="tip-section-label"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What happens if you don't</div>
+            <p>Burnt fluid cooks the clutch packs. Once they slip under load, you've got 5,000–20,000 miles before total failure. Transmission rebuild: $3,000–$6,000. Replacement: often more than the car is worth on older vehicles.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon high" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Timing Belt or Chain <span class="tip-interval">60–100K mi</span></div>
+            <div class="tip-sub">High priority · catastrophic if neglected</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">Why it matters</div>
+            <p>The timing belt or chain synchronizes the crankshaft and camshaft so valves open and close at exactly the right time. If it breaks, on most modern "interference engines," pistons hit valves and destroy the engine instantly.</p>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">What to do</div>
+            <ul>
+              <li>Belt: replace per manual interval, typically 60,000–100,000 miles. Replace the water pump, tensioner, and idlers at the same time — they're all behind the same cover</li>
+              <li>Chain: usually lifetime, but listen for a rattle on cold start that lasts more than a few seconds (worn tensioner)</li>
+              <li>Look up your specific engine — "interference" vs "non-interference" determines whether failure means valves bend</li>
+            </ul>
+          </div>
+          <div class="tip-section danger">
+            <div class="tip-section-label"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What happens if you don't</div>
+            <p>Belt snaps on an interference engine = bent valves, often broken pistons, sometimes cracked heads. Repair cost: $4,000–$10,000+ on most modern engines. The belt itself is a $500–$1,500 service. This is the most expensive thing on this list to ignore.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon medium" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Battery <span class="tip-interval">Test Annually</span></div>
+            <div class="tip-sub">Medium priority · electrical</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">What to do</div>
+            <ul>
+              <li>Most batteries last 3–5 years; test load capacity annually after year 3</li>
+              <li>Clean terminals; corrosion (white/green powder) increases resistance and stresses the alternator</li>
+              <li>Slow cranking, dim headlights at idle, or accessory glitches = weak battery</li>
+              <li>Charging voltage at idle should be 13.8–14.7V — outside that, alternator is suspect</li>
+            </ul>
+          </div>
+          <div class="tip-section danger">
+            <div class="tip-section-label"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What happens if you don't</div>
+            <p>Dead in a parking lot is the cheap version. The expensive version: a weak battery overworks the alternator until it fails ($400–800), or low voltage corrupts the engine computer's adaptive memory and causes drivability issues.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon low" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Air Filter &amp; Cabin Filter <span class="tip-interval">15–30K mi</span></div>
+            <div class="tip-sub">Routine · MPG &amp; air quality</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">Why it matters</div>
+            <p>The engine air filter affects MPG, throttle response, and ultimately engine wear. The cabin filter protects YOU from pollen, dust, and exhaust pollutants entering the HVAC.</p>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">What to do</div>
+            <ul>
+              <li>Engine air filter: 15,000–30,000 miles (sooner if you drive on dirt roads or in dusty areas)</li>
+              <li>Cabin air filter: 15,000–25,000 miles or annually — replace sooner if airflow drops or HVAC smells musty</li>
+              <li>Both are usually 10-minute DIY jobs for $15–$30 each</li>
+            </ul>
+          </div>
+          <div class="tip-section danger">
+            <div class="tip-section-label"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What happens if you don't</div>
+            <p>Clogged engine filter = lower MPG, sluggish throttle, eventually fouled O2 sensor. Clogged cabin filter = weak AC/heat, fogged windshield, mold growth in the HVAC ducts (lifetime smell).</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon medium" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Spark Plugs <span class="tip-interval">30–100K mi</span></div>
+            <div class="tip-sub">Medium priority · ignition</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">What to do</div>
+            <ul>
+              <li>Copper plugs: 30,000 miles. Platinum: 60,000. Iridium: 100,000+ (check the manual)</li>
+              <li>Replace as a complete set, not one at a time</li>
+              <li>Use anti-seize on aluminum heads (sparingly), and a torque wrench — over-tight strips threads</li>
+              <li>Inspect ignition coils at the same time; cracked boots cause misfires</li>
+            </ul>
+          </div>
+          <div class="tip-section danger">
+            <div class="tip-section-label"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What happens if you don't</div>
+            <p>Misfires dump raw fuel into the catalytic converter, destroying it ($800–$2,500 per cat). Worn plugs make the engine work harder, dropping MPG. Bad plugs can let detonation crack a piston ringland.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon routine" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l-1.91 5.86H4l4.82 3.5L7 18.27 12 14.77l5 3.5-1.82-5.91L20 8.86h-6.09z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Wipers, Bulbs &amp; Fluids <span class="tip-interval">Seasonal</span></div>
+            <div class="tip-sub">Routine · visibility &amp; safety</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">What to do</div>
+            <ul>
+              <li>Wiper blades: replace every 6–12 months; streaking or chattering = now</li>
+              <li>Walk around monthly: confirm headlights (low + high), brake lights, turn signals, reverse, plate light all work</li>
+              <li>Top off washer fluid; use winter-formula in cold climates (the cheap blue stuff freezes)</li>
+              <li>Check power steering fluid (if equipped) and differential fluid on rear/4WD vehicles</li>
+            </ul>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">Why it matters</div>
+            <p>Burned bulbs are the #1 cause of "fix-it" tickets and a contributing factor in many rear-end collisions. A wiper that smears in a sudden downpour can cause a momentary blackout at exactly the wrong second.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ============== TRUCKS TIPS ============== -->
+  <div class="panel" id="tip-panel-trucks" role="tabpanel">
+    <div class="tips-card">
+      <div class="tips-card-head">
+        <h3>Truck Maintenance</h3>
+        <p>All the car maintenance items apply — plus these truck-specific concerns.</p>
+      </div>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon high" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 003 9.5c0 4.5 6.5 11 6.5 11s6.5-6.5 6.5-11A6.5 6.5 0 009.5 3zm0 9a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">All Car Maintenance Items <span class="tip-interval">See Cars Tab</span></div>
+            <div class="tip-sub">Oil, brakes, tires, coolant, transmission, etc.</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">Note</div>
+            <p>Everything on the Cars tab applies to trucks — engine oil, brakes, tires, coolant, transmission fluid, timing belt/chain, battery, filters, spark plugs, wipers and bulbs. Trucks just have a few additional items below because of how they're used.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon high" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Differential &amp; Transfer Case Fluid <span class="tip-interval">30–50K mi</span></div>
+            <div class="tip-sub">High priority · drivetrain</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">Why it matters</div>
+            <p>Trucks have rear (and sometimes front) differentials and 4WD trucks have a transfer case. These transmit massive torque through gear sets running in oil baths. The fluid breaks down from heat — especially under towing or off-road use.</p>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">What to do</div>
+            <ul>
+              <li>Differential fluid: 30,000–50,000 miles, sooner if you tow heavy or wade through water</li>
+              <li>Transfer case fluid: typically 30,000 miles for 4WD/AWD systems</li>
+              <li>Limited-slip differentials need a friction modifier additive — don't skip it</li>
+              <li>If a diff was ever submerged in water, change the fluid IMMEDIATELY (water contamination destroys the gears in days)</li>
+            </ul>
+          </div>
+          <div class="tip-section danger">
+            <div class="tip-section-label"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What happens if you don't</div>
+            <p>Differential failure can lock the rear wheels at speed (instant loss of control) or strand you. Repair: $1,500–$4,000 for a rebuild, more for limited-slip. Transfer case failure on a 4WD = stuck wherever you are.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon high" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h14v2H5zM5 18h14v2H5zM7 8h10v8H7z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">U-Joints, Driveshaft &amp; CV Joints <span class="tip-interval">Inspect 15K mi</span></div>
+            <div class="tip-sub">High priority · drivetrain</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">Why it matters</div>
+            <p>U-joints connect driveshaft sections; they wear and can dry out their grease. CV joints on independent-suspension trucks transmit torque to the wheels through flexible boots. A failed boot dumps grease, lets in dirt, and the joint dies fast.</p>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">What to check</div>
+            <ul>
+              <li>Vibration at certain speeds (often 45–60 mph) = U-joint or driveshaft balance</li>
+              <li>Clicking on tight turns, especially with throttle = outer CV joint</li>
+              <li>Inspect CV boots for tears, cracks, or grease slung onto wheel wells</li>
+              <li>U-joints with grease zerks should be greased every 5,000–7,500 miles</li>
+            </ul>
+          </div>
+          <div class="tip-section danger">
+            <div class="tip-section-label"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What happens if you don't</div>
+            <p>Failed U-joint at speed = driveshaft can drop, dig into the road, and pole-vault the truck. Rare but spectacular. Failed CV joint typically just leaves you stranded — but the metal-on-metal grinding can damage the differential housing.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon medium" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h14v2H5zM5 18h14v2H5zM7 8h10v8H7z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Suspension &amp; Steering <span class="tip-interval">Inspect 15K mi</span></div>
+            <div class="tip-sub">Medium priority · ride &amp; handling</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">Why it matters</div>
+            <p>Trucks carry heavier loads and often see rougher use than cars — beating up shocks, struts, ball joints, tie-rod ends, and bushings. Worn suspension causes uneven tire wear, sloppy steering, and bad braking dynamics.</p>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">What to check</div>
+            <ul>
+              <li>Bounce test: push down hard on each corner; truck should rebound once and settle. Multiple bounces = worn shocks</li>
+              <li>Listen for clunks over bumps — usually sway-bar links or worn bushings</li>
+              <li>Loose or "wandering" steering = worn tie-rod ends or idler arm</li>
+              <li>Greasable suspension components (most older trucks): grease every oil change</li>
+            </ul>
+          </div>
+          <div class="tip-section danger">
+            <div class="tip-section-label"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What happens if you don't</div>
+            <p>Failed ball joint can let a wheel collapse outward — sudden loss of control. Worn shocks dramatically increase stopping distance and increase the risk of rollover during emergency maneuvers. Worn tie-rod = inability to steer.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon high" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Towing &amp; Hauling Considerations <span class="tip-interval">Before/After Use</span></div>
+            <div class="tip-sub">High priority · load management</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">Why it matters</div>
+            <p>Towing and heavy hauling multiplies the stress on every drivetrain component — engine, transmission, brakes, cooling, suspension, and tires. Following normal maintenance intervals isn't enough under heavy use.</p>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">Before towing/hauling</div>
+            <ul>
+              <li>Check tire pressures — increase rear pressure per the load chart in your manual</li>
+              <li>Verify trailer brake controller is calibrated; test trailer brakes at low speed before merging onto a highway</li>
+              <li>Confirm tongue weight is 10–15% of trailer weight; too little = sway, too much = squat &amp; loss of steering</li>
+              <li>Inspect hitch, safety chains crossed under the tongue, breakaway cable connected, lights working</li>
+            </ul>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">After heavy use</div>
+            <ul>
+              <li>Cut maintenance intervals in half — oil, transmission, differentials</li>
+              <li>Inspect brakes; heavy hauling can cook pads in a single trip</li>
+              <li>Watch transmission temp gauge during tow; if it pegs, pull over and let it cool</li>
+            </ul>
+          </div>
+          <div class="tip-section danger">
+            <div class="tip-section-label"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What happens if you don't</div>
+            <p>Overheated transmission = burnt clutches and a $4,000+ rebuild. Improperly loaded trailer = trailer sway, jackknife, or rollover. Failed trailer brakes mean YOUR brakes alone are stopping the entire combined weight — recipe for boiled fluid and brake failure on a long descent.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="tip-item">
+        <summary class="tip-summary">
+          <div class="tip-icon medium" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h14v2H5zM5 18h14v2H5zM7 8h10v8H7z"/></svg></div>
+          <div class="tip-meta">
+            <div class="tip-title">Frame &amp; Underbody Rust <span class="tip-interval">Annual</span></div>
+            <div class="tip-sub">Medium priority · structural</div>
+          </div>
+          <svg class="tip-chevron" viewBox="0 0 9 14"><path d="M1.5 1l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="tip-detail">
+          <div class="tip-section">
+            <div class="tip-section-label">Why it matters</div>
+            <p>Body-on-frame trucks rely on a steel ladder frame for structural integrity. In Northeast PA's road-salt environment, frames rust from the inside out — looking fine until the day a brake line, fuel line, or frame member fails.</p>
+          </div>
+          <div class="tip-section">
+            <div class="tip-section-label">What to do</div>
+            <ul>
+              <li>Wash the underbody after every salt-road exposure (winter especially) — high-pressure rinse the wheel wells and frame</li>
+              <li>Inspect annually for surface vs. structural rust — flaking is normal, ballooning or perforations are not</li>
+              <li>Brake lines, fuel lines, and trans-cooler lines often rust through long before the frame does — replace as a set when one goes</li>
+              <li>Consider a rust-prevention spray (Fluid Film, Woolwax, etc.) annually before salt season</li>
+            </ul>
+          </div>
+          <div class="tip-section danger">
+            <div class="tip-section-label"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What happens if you don't</div>
+            <p>A rusted-through brake line bursts under hard pedal — partial brake loss at the worst moment. Rusted fuel line = leak risk. Severely rusted frame can fail an inspection and total an otherwise drivable truck.</p>
+          </div>
+        </div>
+      </details>
+    </div>
   </div>
 </section>
 
@@ -2000,20 +2820,20 @@ footer .foot-logo .o { color: var(--chrome); }
      FOOTER
 ================================================================ -->
 <footer>
-  <div class="foot-logo">888<span class="o">MECH</span>.COM</div>
+  <div class="foot-brand">888MECH.COM</div>
   <div>Mobile Mechanics · Cars · Trucks · Bikes</div>
-  <div style="margin-top:6px; opacity: 0.6;">© <span id="yr"></span> 888MECH · Scranton NEPA</div>
+  <div style="margin-top:6px; opacity:0.7;">© <span id="yr"></span> 888MECH · Scranton NEPA</div>
 </footer>
 
 <!-- ================================================================
-     BOTTOM ACTION BAR
+     TAB BAR
 ================================================================ -->
 <nav class="action-bar" aria-label="Quick actions">
-  <a class="action-btn text" href="sms:+15706148445">
+  <a class="action-btn" href="sms:+15706148445">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 2H4a2 2 0 00-2 2v18l4-4h14a2 2 0 002-2V4a2 2 0 00-2-2zM7 9h10v2H7V9zm6 5H7v-2h6v2zm4-8H7V4h10v2z"/></svg>
     <span class="label">Text</span>
   </a>
-  <a class="action-btn call" href="tel:+15706148445">
+  <a class="action-btn" href="tel:+15706148445">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.58l2.2-2.21a.96.96 0 00.25-1c-.38-1.12-.58-2.32-.58-3.57a1 1 0 00-1-1H4a1 1 0 00-1 1c0 9.39 7.61 17 17 17a1 1 0 001-1v-3.5a1 1 0 00-1-1z"/></svg>
     <span class="label">Call</span>
   </a>
@@ -2021,26 +2841,29 @@ footer .foot-logo .o { color: var(--chrome); }
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 16.5v1h-3v-1h-1.25a.75.75 0 010-1.5h4.5a.75.75 0 000-1.5h-3a2.25 2.25 0 010-4.5h.25V8h3v1h1.25a.75.75 0 010 1.5h-4.5a.75.75 0 000 1.5h3a2.25 2.25 0 010 4.5h-.25z"/></svg>
     <span class="label">Pay Now</span>
   </a>
-  <a class="action-btn email" href="mailto:joetriple888@yahoo.com">
+  <a class="action-btn" href="#tips">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg>
+    <span class="label">Tips</span>
+  </a>
+  <a class="action-btn" href="mailto:joetriple888@yahoo.com">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
     <span class="label">Email</span>
   </a>
 </nav>
 
 <!-- ================================================================
-     iOS INSTALL MODAL (shown when iOS user taps Save to Home Screen)
+     INSTALL SHEET (iOS)
 ================================================================ -->
 <div class="modal-backdrop" id="ios-install-modal" role="dialog" aria-modal="true" aria-labelledby="ios-modal-title">
-  <div class="modal-glass">
+  <div class="modal-sheet">
     <div class="modal-grabber" aria-hidden="true"></div>
-    <p class="modal-kicker">Install 888MECH</p>
+    <p class="modal-eyebrow">Install 888MECH</p>
     <h3 class="modal-title" id="ios-modal-title">Add to Home Screen <span class="accent">in 3 Steps</span></h3>
 
     <ol class="modal-steps">
       <li class="modal-step">
         <div class="modal-step-num">1</div>
         <svg class="modal-step-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <!-- iOS Share icon (square with up arrow) -->
           <path d="M12 2L8 6h3v9h2V6h3l-4-4zm7 11v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2z"/>
         </svg>
         <span class="modal-step-text">Tap the <strong>Share</strong> icon at the bottom of Safari</span>
@@ -2048,7 +2871,6 @@ footer .foot-logo .o { color: var(--chrome); }
       <li class="modal-step">
         <div class="modal-step-num">2</div>
         <svg class="modal-step-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <!-- Plus square (Add to Home Screen icon) -->
           <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
         </svg>
         <span class="modal-step-text">Scroll and tap <strong>"Add to Home Screen"</strong></span>
@@ -2062,60 +2884,42 @@ footer .foot-logo .o { color: var(--chrome); }
       </li>
     </ol>
 
-    <button class="modal-close" id="ios-modal-close" type="button">GOT IT</button>
+    <button class="modal-close" id="ios-modal-close" type="button">Got it</button>
   </div>
 </div>
 
 <script>
 // ============================================================
-// AUTO-PRICE ADJUSTMENT — compounds +10% each Jan 1
-// Base year: 2026 (current prices are the baseline)
-// Updates: visible prices, inline $ amounts, JSON-LD schema,
-//          and the "Effective YYYY" tag in each menu header.
+// AUTO PRICE ADJUSTMENT — compounds 10% each Jan 1
 // ============================================================
 (function () {
   const BASE_YEAR = 2026;
   const ANNUAL_INCREASE = 0.10;
-
   const currentYear = new Date().getFullYear();
   const yearsElapsed = Math.max(0, currentYear - BASE_YEAR);
   const multiplier = Math.pow(1 + ANNUAL_INCREASE, yearsElapsed);
 
   function formatPrice(amount) {
     const rounded = Math.round(amount * 100) / 100;
-    // Whole dollar amounts display without decimals
-    if (Math.abs(rounded - Math.round(rounded)) < 0.005) {
-      return '$' + Math.round(rounded);
-    }
+    if (Math.abs(rounded - Math.round(rounded)) < 0.005) return '$' + Math.round(rounded);
     return '$' + rounded.toFixed(2);
   }
 
-  // 1) Update every visible [data-base] span
   document.querySelectorAll('[data-base]').forEach((el) => {
     const base = parseFloat(el.dataset.base);
-    if (!isNaN(base)) {
-      el.textContent = formatPrice(base * multiplier);
-    }
+    if (!isNaN(base)) el.textContent = formatPrice(base * multiplier);
   });
-
-  // 2) Update every .year-tag with the current effective year
   document.querySelectorAll('.year-tag').forEach((el) => {
     el.textContent = currentYear;
   });
 
-  // 3) Update JSON-LD structured data so Google's rich results stay accurate.
-  //    Walks the schema graph, multiplies every Offer.price, and replaces
-  //    $XX amounts inside description strings.
+  // Update JSON-LD prices to match
   const schemaScript = document.querySelector('script[type="application/ld+json"]');
   if (schemaScript && yearsElapsed > 0) {
     try {
       const schema = JSON.parse(schemaScript.textContent);
-
       function walk(obj) {
-        if (Array.isArray(obj)) {
-          obj.forEach(walk);
-          return;
-        }
+        if (Array.isArray(obj)) { obj.forEach(walk); return; }
         if (!obj || typeof obj !== 'object') return;
         for (const key of Object.keys(obj)) {
           const val = obj[key];
@@ -2123,69 +2927,60 @@ footer .foot-logo .o { color: var(--chrome); }
             const amt = parseFloat(val);
             if (!isNaN(amt)) obj[key] = (amt * multiplier).toFixed(2);
           } else if (typeof val === 'string') {
-            // Replace $XX amounts in descriptions
-            obj[key] = val.replace(/\$(\d+(?:\.\d+)?)/g, (_, n) => {
-              const adj = parseFloat(n) * multiplier;
-              return formatPrice(adj);
-            });
+            obj[key] = val.replace(/\$(\d+(?:\.\d+)?)/g, (_, n) => formatPrice(parseFloat(n) * multiplier));
           } else if (val && typeof val === 'object') {
             walk(val);
           }
         }
       }
       walk(schema);
-
-      // Update dateModified so crawlers know the page changed
-      const graph = schema['@graph'] || [];
-      graph.forEach((node) => {
-        if (node['@type'] === 'WebPage') {
-          node.dateModified = new Date().toISOString().slice(0, 10);
-        }
+      (schema['@graph'] || []).forEach((node) => {
+        if (node['@type'] === 'WebPage') node.dateModified = new Date().toISOString().slice(0, 10);
       });
-
       schemaScript.textContent = JSON.stringify(schema);
-    } catch (e) {
-      console.warn('[888MECH] Could not adjust schema prices:', e);
-    }
+    } catch (e) { console.warn('Schema price update failed', e); }
   }
 
-  // Expose for debugging in console
   window.__888MECH_PRICING = {
-    baseYear: BASE_YEAR,
-    currentYear,
-    yearsElapsed,
-    multiplier,
-    nextIncrease: new Date(currentYear + 1, 0, 1).toDateString(),
+    baseYear: BASE_YEAR, currentYear, yearsElapsed, multiplier,
+    nextIncrease: new Date(currentYear + 1, 0, 1).toDateString()
   };
 })();
 
-// ============================================================
-// ORIGINAL TAB + INSTALL SCRIPTS
-// ============================================================
-// Tab switching
-document.querySelectorAll('.tab').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const target = btn.dataset.panel;
-    document.querySelectorAll('.tab').forEach(t => {
-      t.classList.remove('active');
-      t.setAttribute('aria-selected', 'false');
+// Tab switching with subtle slide — services + tips
+function wireSegments(selector, panelPrefix, dataKey) {
+  document.querySelectorAll(selector).forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset[dataKey];
+      const group = btn.parentElement;
+      group.querySelectorAll('.segment').forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      // Find the panels in the same section
+      const section = group.closest('section');
+      section.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      const panel = document.getElementById(panelPrefix + target);
+      if (panel) panel.classList.add('active');
     });
-    btn.classList.add('active');
-    btn.setAttribute('aria-selected', 'true');
-    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    document.getElementById('panel-' + target).classList.add('active');
   });
-});
+}
+wireSegments('.segment[data-panel]', 'panel-', 'panel');
+wireSegments('.segment[data-tip-panel]', 'tip-panel-', 'tipPanel');
 
-// Footer year
 document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Service worker registration
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
+}
 
 // ============================================================
 // SMART INSTALL TO HOME SCREEN
-// - Android/Chrome/Edge: captures beforeinstallprompt, shows native prompt
-// - iOS Safari: shows custom modal with tap-through instructions
-// - Already installed (standalone mode): hides the button entirely
-// - Unsupported browsers (Firefox iOS, etc.): stays hidden gracefully
 // ============================================================
 (function () {
   const installBtn = document.getElementById('install-btn');
@@ -2196,13 +2991,12 @@ document.getElementById('yr').textContent = new Date().getFullYear();
   const ua = navigator.userAgent || '';
   const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
   const isAndroid = /Android/.test(ua);
-  const isMac = /Macintosh/.test(ua) && 'ontouchend' in document; // iPadOS reports as Mac
+  const isMac = /Macintosh/.test(ua) && 'ontouchend' in document;
   const isStandalone =
     window.matchMedia('(display-mode: standalone)').matches ||
     window.navigator.standalone === true ||
     document.referrer.includes('android-app://');
 
-  // If already installed, don't show the button at all.
   if (isStandalone) {
     installBtn.classList.remove('visible');
     return;
@@ -2210,13 +3004,11 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 
   let deferredPrompt = null;
 
-  // iOS / iPadOS path — no programmatic install, so show instructions modal
   if (isIOS || isMac) {
     platformLabel.textContent = 'iOS';
     installBtn.classList.add('visible');
     installBtn.addEventListener('click', openIosModal);
   } else {
-    // Android / Chrome / Edge path
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
@@ -2225,27 +3017,16 @@ document.getElementById('yr').textContent = new Date().getFullYear();
     });
 
     installBtn.addEventListener('click', async () => {
-      if (!deferredPrompt) {
-        // Fallback: if for some reason no prompt is cached, show iOS-style instructions
-        // (works as a sensible universal fallback for Firefox, etc.)
-        openIosModal();
-        return;
-      }
+      if (!deferredPrompt) { openIosModal(); return; }
       try {
         deferredPrompt.prompt();
         const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted') {
-          installBtn.classList.remove('visible');
-        }
-      } catch (err) {
-        console.warn('Install prompt failed', err);
-      } finally {
-        deferredPrompt = null;
-      }
+        if (outcome === 'accepted') installBtn.classList.remove('visible');
+      } catch (err) { console.warn(err); }
+      finally { deferredPrompt = null; }
     });
   }
 
-  // Once installed via either path, hide the button
   window.addEventListener('appinstalled', () => {
     installBtn.classList.remove('visible');
     closeIosModal();
@@ -2261,7 +3042,6 @@ document.getElementById('yr').textContent = new Date().getFullYear();
     document.body.style.overflow = '';
   }
 
-  // Modal close handlers
   iosModalClose?.addEventListener('click', closeIosModal);
   iosModal?.addEventListener('click', (e) => {
     if (e.target === iosModal) closeIosModal();
@@ -2270,13 +3050,6 @@ document.getElementById('yr').textContent = new Date().getFullYear();
     if (e.key === 'Escape' && iosModal.classList.contains('visible')) closeIosModal();
   });
 })();
-
-// Register service worker
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js').catch(() => {});
-  });
-}
 </script>
 </body>
 </html>
